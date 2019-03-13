@@ -1,0 +1,19 @@
+﻿<Page
+    x:Class="DataStreamerAppServiceUWPCommSample.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DataStreamerAppServiceUWPCommSample"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <RadioButton x:Name="radioButtonSend" Content="Send" HorizontalAlignment="Left" Margin="561,229,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.221,-0.74" Checked="RadioButtonSend_Checked"/>
+        <RadioButton x:Name="radioButtonReceive" Content="Receive" HorizontalAlignment="Left" Height="32" Margin="795,229,0,0" VerticalAlignment="Top" Width="148" Checked="RadioButtonReceive_Checked"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="35" Margin="561,319,0,0" Text="Hello World!" VerticalAlignment="Top" Width="361"/>
+        <Button x:Name="buttonSubmit" Content="Submit" HorizontalAlignment="Left" Height="57" Margin="561,412,0,0" VerticalAlignment="Top" Width="361" Click="ButtonSubmit_Click"/>
+        <TextBlock x:Name="textBlockHeader" HorizontalAlignment="Center" Height="42" Margin="298,922,0,0" Text="This sample application can send or receive data from Data Streamer via app service" TextWrapping="Wrap" VerticalAlignment="Top" Width="921" FontSize="24"/>
+        <TextBlock x:Name="textBlockStatus" HorizontalAlignment="Left" Height="133" Margin="561,500,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="363"/>
+    </Grid>
+</Page>
