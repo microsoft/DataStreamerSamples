@@ -5,3 +5,5 @@ This allows one to understand the commands involved in the communication. It als
 The communication channel with Data Streamer need to remain opened for long time for the stream to continue sending, or receiving data to/from Data streamer. This can be done in few ways. The recommeneded options are talked about [here](https://docs.microsoft.com/en-us/windows/uwp/launch-resume/run-in-the-background-indefinetly)
 
 More information on what are the different UWP capabilities is available [here](https://docs.microsoft.com/en-us/windows/uwp/packaging/app-capability-declarations)
+
+Note: Restricted capabilities are available only to apps that are developed by Microsoft and its partners
