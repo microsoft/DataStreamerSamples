@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Package
+  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
+  xmlns:desktop="http://schemas.microsoft.com/appx/manifest/desktop/windows10"
+  IgnorableNamespaces="uap mp rescap desktop">
+
+  <Identity
+    Name="57012MikeFrancis.Electron-ExcelDataStreamerSample"
+    Publisher="CN=76F03FF0-6FBC-4475-8F1A-617EA5713D5C"
+    Version="1.66.12.0" />
+
+  <Properties>
+    <DisplayName>Electron-Excel Data Streamer Sample</DisplayName>
+    <PublisherDisplayName>Mike Francis</PublisherDisplayName>
+    <Logo>Images\StoreLogo.png</Logo>
+  </Properties>
+
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.17763.0" MaxVersionTested="10.0.17763.0" />
+  </Dependencies>
+
+  <Resources>
+    <Resource Language="x-generate"/>
+  </Resources>
+
+  <Applications>
+    <Application Id="App"
+      Executable="AppServiceUWP.exe"
+      EntryPoint="AppServiceHost.App">
+      <uap:VisualElements
+        AppListEntry="none"
+        DisplayName="Electron Datastreamer - Debug"
+        Description="PackagingProject"
+        BackgroundColor="transparent"
+        Square150x150Logo="Images\Square150x150Logo.png"
+        Square44x44Logo="Images\Square44x44Logo.png">
+        <uap:DefaultTile
+          Wide310x150Logo="Images\Wide310x150Logo.png" />
+      </uap:VisualElements>
+      <Extensions>
+        <uap:Extension Category="windows.appService">
+          <uap:AppService Name="com.microsoft.datastreamerconnect"/>
+        </uap:Extension>
+      </Extensions>
+    </Application>
+    <Application Id="FTApp"
+        Executable="ElectronLauncher\ElectronLauncher.exe"
+        EntryPoint="Windows.FullTrustApplication">
+      <uap:VisualElements
+        DisplayName="Electron Datastreamer - Debug"
+        Description="PackagingProject"
+        BackgroundColor="transparent"
+        Square150x150Logo="Images\Square150x150Logo.png"
+        Square44x44Logo="Images\Square44x44Logo.png">
+        <uap:DefaultTile
+          Wide310x150Logo="Images\Wide310x150Logo.png" />
+      </uap:VisualElements>
+      <Extensions>
+      </Extensions>
+    </Application>
+  </Applications>
+  <Capabilities>
+    <Capability Name="internetClient" />
+    <rescap:Capability Name="extendedBackgroundTaskTime" />
+    <rescap:Capability Name="runFullTrust" />
+</Capabilities>
+</Package>

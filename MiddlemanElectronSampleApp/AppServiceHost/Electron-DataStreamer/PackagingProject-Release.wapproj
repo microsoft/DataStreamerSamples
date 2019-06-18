@@ -1,0 +1,463 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition="'$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '15.0'">
+    <VisualStudioVersion>15.0</VisualStudioVersion>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x86">
+      <Configuration>Debug</Configuration>
+      <Platform>x86</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x86">
+      <Configuration>Release</Configuration>
+      <Platform>x86</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|ARM">
+      <Configuration>Debug</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|ARM">
+      <Configuration>Release</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|ARM64">
+      <Configuration>Debug</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|ARM64">
+      <Configuration>Release</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|AnyCPU">
+      <Configuration>Debug</Configuration>
+      <Platform>AnyCPU</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|AnyCPU">
+      <Configuration>Release</Configuration>
+      <Platform>AnyCPU</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Configuration">
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <WapProjPath Condition="'$(WapProjPath)'==''">$(MSBuildExtensionsPath)\Microsoft\DesktopBridge\</WapProjPath>
+  </PropertyGroup>
+  <Import Project="$(WapProjPath)\Microsoft.DesktopBridge.props" />
+  <PropertyGroup>
+    <ProjectGuid>d7a9d754-74e9-4f53-b440-9853a10e6a35</ProjectGuid>
+    <TargetPlatformVersion>10.0.17763.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.15063.0</TargetPlatformMinVersion>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <PackageCertificateKeyFile>PackagingProject-Release_StoreKey.pfx</PackageCertificateKeyFile>
+    <EntryPointProjectUniqueName>..\AppServiceUWP\AppServiceUWP.csproj</EntryPointProjectUniqueName>
+    <PackageCertificateThumbprint>2337DA86A9CA0FEBB4055AB5A0F5556C6FC2FE8F</PackageCertificateThumbprint>
+    <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <AppxBundlePlatforms>x86|x64</AppxBundlePlatforms>
+    <AppInstallerUpdateFrequency>1</AppInstallerUpdateFrequency>
+    <AppInstallerCheckForUpdateFrequency>OnApplicationRun</AppInstallerCheckForUpdateFrequency>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <AppxBundle>Always</AppxBundle>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <AppxBundle>Always</AppxBundle>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
+    <AppxBundle>Always</AppxBundle>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
+    <AppxBundle>Always</AppxBundle>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <AppxBundle>Always</AppxBundle>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
+    <AppxBundle>Always</AppxBundle>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
+    <AppxBundle>Always</AppxBundle>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <AppxBundle>Always</AppxBundle>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
+    <AppxBundle>Always</AppxBundle>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
+    <AppxBundle>Always</AppxBundle>
+  </PropertyGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest">
+      <SubType>Designer</SubType>
+    </AppxManifest>
+    <Content Include="..\..\Electron\dist\win-unpacked\LICENSE.electron.txt">
+      <Link>ElectronExe\LICENSE.electron.txt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Electron-DataStreamer_TemporaryKey.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\..\Electron\dist\win-unpacked\chrome_100_percent.pak">
+      <Link>ElectronExe\chrome_100_percent.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\chrome_200_percent.pak">
+      <Link>ElectronExe\chrome_200_percent.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\d3dcompiler_47.dll">
+      <Link>ElectronExe\d3dcompiler_47.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\ffmpeg.dll">
+      <Link>ElectronExe\ffmpeg.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\getstarted.exe">
+      <Link>ElectronExe\getstarted.exe</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\icudtl.dat">
+      <Link>ElectronExe\icudtl.dat</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\libEGL.dll">
+      <Link>ElectronExe\libEGL.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\libGLESv2.dll">
+      <Link>ElectronExe\libGLESv2.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\LICENSES.chromium.html">
+      <Link>ElectronExe\LICENSES.chromium.html</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\locales\am.pak">
+      <Link>ElectronExe\locales\am.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\locales\ar.pak">
+      <Link>ElectronExe\locales\ar.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\locales\bg.pak">
+      <Link>ElectronExe\locales\bg.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\locales\bn.pak">
+      <Link>ElectronExe\locales\bn.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\locales\ca.pak">
+      <Link>ElectronExe\locales\ca.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\locales\cs.pak">
+      <Link>ElectronExe\locales\cs.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\locales\da.pak">
+      <Link>ElectronExe\locales\da.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\locales\de.pak">
+      <Link>ElectronExe\locales\de.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\locales\el.pak">
+      <Link>ElectronExe\locales\el.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\locales\en-GB.pak">
+      <Link>ElectronExe\locales\en-GB.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\locales\en-US.pak">
+      <Link>ElectronExe\locales\en-US.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\locales\es-419.pak">
+      <Link>ElectronExe\locales\es-419.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\locales\es.pak">
+      <Link>ElectronExe\locales\es.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\locales\et.pak">
+      <Link>ElectronExe\locales\et.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\locales\fa.pak">
+      <Link>ElectronExe\locales\fa.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\locales\fi.pak">
+      <Link>ElectronExe\locales\fi.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\locales\fil.pak">
+      <Link>ElectronExe\locales\fil.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\locales\fr.pak">
+      <Link>ElectronExe\locales\fr.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\locales\gu.pak">
+      <Link>ElectronExe\locales\gu.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\locales\he.pak">
+      <Link>ElectronExe\locales\he.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\locales\hi.pak">
+      <Link>ElectronExe\locales\hi.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\locales\hr.pak">
+      <Link>ElectronExe\locales\hr.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\locales\hu.pak">
+      <Link>ElectronExe\locales\hu.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\locales\id.pak">
+      <Link>ElectronExe\locales\id.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\locales\it.pak">
+      <Link>ElectronExe\locales\it.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\locales\ja.pak">
+      <Link>ElectronExe\locales\ja.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\locales\kn.pak">
+      <Link>ElectronExe\locales\kn.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\locales\ko.pak">
+      <Link>ElectronExe\locales\ko.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\locales\lt.pak">
+      <Link>ElectronExe\locales\lt.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\locales\lv.pak">
+      <Link>ElectronExe\locales\lv.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\locales\ml.pak">
+      <Link>ElectronExe\locales\ml.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\locales\mr.pak">
+      <Link>ElectronExe\locales\mr.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\locales\ms.pak">
+      <Link>ElectronExe\locales\ms.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\locales\nb.pak">
+      <Link>ElectronExe\locales\nb.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\locales\nl.pak">
+      <Link>ElectronExe\locales\nl.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\locales\pl.pak">
+      <Link>ElectronExe\locales\pl.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\locales\pt-BR.pak">
+      <Link>ElectronExe\locales\pt-BR.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\locales\pt-PT.pak">
+      <Link>ElectronExe\locales\pt-PT.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\locales\ro.pak">
+      <Link>ElectronExe\locales\ro.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\locales\ru.pak">
+      <Link>ElectronExe\locales\ru.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\locales\sk.pak">
+      <Link>ElectronExe\locales\sk.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\locales\sl.pak">
+      <Link>ElectronExe\locales\sl.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\locales\sr.pak">
+      <Link>ElectronExe\locales\sr.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\locales\sv.pak">
+      <Link>ElectronExe\locales\sv.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\locales\sw.pak">
+      <Link>ElectronExe\locales\sw.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\locales\ta.pak">
+      <Link>ElectronExe\locales\ta.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\locales\te.pak">
+      <Link>ElectronExe\locales\te.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\locales\th.pak">
+      <Link>ElectronExe\locales\th.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\locales\tr.pak">
+      <Link>ElectronExe\locales\tr.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\locales\uk.pak">
+      <Link>ElectronExe\locales\uk.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\locales\vi.pak">
+      <Link>ElectronExe\locales\vi.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\locales\zh-CN.pak">
+      <Link>ElectronExe\locales\zh-CN.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\locales\zh-TW.pak">
+      <Link>ElectronExe\locales\zh-TW.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\natives_blob.bin">
+      <Link>ElectronExe\natives_blob.bin</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\osmesa.dll">
+      <Link>ElectronExe\osmesa.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\resources.pak">
+      <Link>ElectronExe\resources.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\resources\app.asar">
+      <Link>ElectronExe\resources\app.asar</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\resources\electron.asar">
+      <Link>ElectronExe\resources\electron.asar</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\resources\elevate.exe">
+      <Link>ElectronExe\resources\elevate.exe</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\snapshot_blob.bin">
+      <Link>ElectronExe\snapshot_blob.bin</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\swiftshader\libEGL.dll">
+      <Link>ElectronExe\swiftshader\libEGL.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\swiftshader\libGLESv2.dll">
+      <Link>ElectronExe\swiftshader\libGLESv2.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\v8_context_snapshot.bin">
+      <Link>ElectronExe\v8_context_snapshot.bin</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\dist\win-unpacked\VkICD_mock_icd.dll">
+      <Link>ElectronExe\VkICD_mock_icd.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\LargeTile.scale-100.png" />
+    <Content Include="Images\LargeTile.scale-125.png" />
+    <Content Include="Images\LargeTile.scale-150.png" />
+    <Content Include="Images\LargeTile.scale-200.png" />
+    <Content Include="Images\LargeTile.scale-400.png" />
+    <Content Include="Images\SmallTile.scale-100.png" />
+    <Content Include="Images\SmallTile.scale-125.png" />
+    <Content Include="Images\SmallTile.scale-150.png" />
+    <Content Include="Images\SmallTile.scale-200.png" />
+    <Content Include="Images\SmallTile.scale-400.png" />
+    <Content Include="Images\SplashScreen.scale-100.png" />
+    <Content Include="Images\SplashScreen.scale-125.png" />
+    <Content Include="Images\SplashScreen.scale-150.png" />
+    <Content Include="Images\SplashScreen.scale-200.png" />
+    <Content Include="Images\LockScreenLogo.scale-200.png" />
+    <Content Include="Images\SplashScreen.scale-400.png" />
+    <Content Include="Images\Square150x150Logo.scale-100.png" />
+    <Content Include="Images\Square150x150Logo.scale-125.png" />
+    <Content Include="Images\Square150x150Logo.scale-150.png" />
+    <Content Include="Images\Square150x150Logo.scale-200.png" />
+    <Content Include="Images\Square150x150Logo.scale-400.png" />
+    <Content Include="Images\Square44x44Logo.altform-unplated_targetsize-16.png" />
+    <Content Include="Images\Square44x44Logo.altform-unplated_targetsize-256.png" />
+    <Content Include="Images\Square44x44Logo.altform-unplated_targetsize-32.png" />
+    <Content Include="Images\Square44x44Logo.altform-unplated_targetsize-48.png" />
+    <Content Include="Images\Square44x44Logo.scale-100.png" />
+    <Content Include="Images\Square44x44Logo.scale-125.png" />
+    <Content Include="Images\Square44x44Logo.scale-150.png" />
+    <Content Include="Images\Square44x44Logo.scale-200.png" />
+    <Content Include="Images\Square44x44Logo.scale-400.png" />
+    <Content Include="Images\Square44x44Logo.targetsize-16.png" />
+    <Content Include="Images\Square44x44Logo.targetsize-24.png" />
+    <Content Include="Images\Square44x44Logo.targetsize-24_altform-unplated.png" />
+    <Content Include="Images\Square44x44Logo.targetsize-256.png" />
+    <Content Include="Images\Square44x44Logo.targetsize-32.png" />
+    <Content Include="Images\Square44x44Logo.targetsize-48.png" />
+    <Content Include="Images\StoreLogo.scale-100.png" />
+    <Content Include="Images\StoreLogo.scale-125.png" />
+    <Content Include="Images\StoreLogo.scale-150.png" />
+    <Content Include="Images\StoreLogo.scale-200.png" />
+    <Content Include="Images\StoreLogo.scale-400.png" />
+    <Content Include="Images\Wide310x150Logo.scale-100.png" />
+    <Content Include="Images\Wide310x150Logo.scale-125.png" />
+    <Content Include="Images\Wide310x150Logo.scale-150.png" />
+    <Content Include="Images\Wide310x150Logo.scale-200.png" />
+    <Content Include="Images\Wide310x150Logo.scale-400.png" />
+    <None Include="PackagingProject-Release_StoreKey.pfx" />
+    <None Include="Package.StoreAssociation.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AppServiceUWP\AppServiceUWP.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ElectronExe\locales\" />
+    <Folder Include="ElectronExe\swiftshader\" />
+    <Folder Include="ElectronExe\resources\" />
+  </ItemGroup>
+  <Import Project="$(WapProjPath)\Microsoft.DesktopBridge.targets" />
+</Project>
