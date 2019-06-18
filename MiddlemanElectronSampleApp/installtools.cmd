@@ -1,5 +1,3 @@
-set REPO="http://github.com/mjfusa/samples"
-
 :checkPrivileges 
 NET FILE 1>NUL 2>NUL
 if '%errorlevel%' == '0' ( goto continue 
@@ -16,10 +14,7 @@ cmd /c npm install --global --production windows-build-tools@4.0.0 -y
 choco install windows-sdk-10-version-1809-all -y
 
 :eds
-md \EDS
-cd \EDS
-cmd.exe /c git clone %REPO%
-cd samples\electron\getstarted\electron
+cd electron
 cmd /c npm install --global --production windows-build-tools
 cmd /c npm config set msvs_version 2015 --global
 cmd /c npm config set python %userprofile%\.windows-build-tools\python27\python.exe
@@ -30,6 +25,6 @@ copy "C:\Program Files (x86)\Windows Kits\10\UnionMetadata\10.0.17763.0\windows.
 cmd.exe /c npm install
 cmd.exe /c npm install electron-builder
 cmd.exe /c .\node_modules\\.bin\electron-builder -w
-rem choco install visualstudio2019community --package-parameters "--add Microsoft.VisualStudio.Workload.ManagedDesktop --add Microsoft.VisualStudio.Workload.NativeDesktop --add Microsoft.VisualStudio.Workload.NetCoreTools --add Microsoft.VisualStudio.Workload.Universal  --includeRecommended --includeOptional --passive --locale en-US" -y
+cd ..
 
 :end

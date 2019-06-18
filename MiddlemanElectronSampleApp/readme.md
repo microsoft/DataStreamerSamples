@@ -21,15 +21,16 @@ This sample will use several Electron / Node.JS  features including:
 
 1. Install Office Apps from http://office.com  (Requires Office365 subscription.)
 1. Open a Windows admin command prompt (cmd)  
-3. Load this link into your browser: https://raw.githubusercontent.com/mjfusa/Samples/master/electron/getstarted/starthere.cmd
-4. Copy and paste the contents into the admin command prompt. This script will install, configure and build the Electron components of the sample.  
+3. Navigate to the ```DataStreamerSamples\MiddlemanElectronSampleApp``` directory.
+4. Run ```installtools.cmd```. This script will install, configure and build the Electron components of the sample.  
 5. Install Visual Studio 2019 Community with workloads:  
    a. ```.NET desktop development```  
    b. ```Desktop development with C++```  
-   c. ```Universal Windows Platform Development```
+   c. ```Universal Windows Platform Development```  
+6. Navigate to the ```DataStreamerSamples\MiddlemanElectronSampleApp\AppServiceHost``` directory.
 6. Load **AppServiceHost.sln**  into Visual Studio  
 7. Set Solution Configuration to ```Debug```, ```x86```, ```PackagingProject-Debug```  
-8. Set ```PackagingProject-Debug```  as **StartUp** project.
+8. Set ```PackagingProject-Debug``` as the **StartUp** project.
 9. Right click ```PackagingProject-Debug```  select **Deploy**.
 10. From Start menu select ```Electron Datastreamer - Debug```.
 11. The Electron Data Streamer client will open and connect to the App Service running in the background. **Hello Excel Data Streamer!**
@@ -76,8 +77,7 @@ You will need the latest version of Office 365 installed to use the Data Streame
 * NodeRT libraries
 
 ## Install Tools
-* Clone this repo and run ```starthere.cmd``` from a Windows admin command prompt. This will install all of the tools and build the native NodeRT libraries and Electron Win32 app.
-* Note for details on the installed tools, see the batch file ```installtools.cmd```.
+* Clone this repo and run ```installtools.cmd``` from a Windows admin command prompt. This will install all of the tools and build the native NodeRT libraries and Electron Win32 app.
 * Install Visual Studio Community. This is not done by the batch file. You can install from http://visualstudio.microsoft.com or use the Chocolatey command:  
 
 ```choco install visualstudio2019community --package-parameters "--add Microsoft.VisualStudio.Workload.ManagedDesktop --add Microsoft.VisualStudio.Workload.NativeDesktop --add Microsoft.VisualStudio.Workload.NetCoreTools --add Microsoft.VisualStudio.Workload.Universal  --includeRecommended --includeOptional --passive --locale en-US" -y```  
@@ -186,9 +186,9 @@ Note that this requires that the Electron app has been built with Electron-Build
 
 ## App Packaging
 
-Using a 'Windows App Packaging Project' we package the App Service and the Electron app together. It includes the necessary edits to Package.appxmanifest to support the app service registration and launching of the electron client. You can create packages for sideloading or uploading to the Store.
+Using a 'Windows App Packaging Project' we package the App Service and the Electron app together. It includes the necessary edits to Package.appxmanifest to support the app service registration and launching of the electron client. You use this project type to create packages for sideloading or uploading to the Store.
 
-Is is what the ```<Applications>``` section looks like:
+This is what the ```<Applications>``` section looks like in the ```Package.appxmanifest``` file:
 
 ```xml
   <Applications>
@@ -234,13 +234,13 @@ AppListEntry="none"
 This will prevent the App Service from being added the the **Start** menu. Having the app in the Start menu is not needed since the app service is never started by the user.
 
 ## Including the Electron App
-The electron app is included in the Packaging Project via linked files to the output files of ``Electron-Builder``. Electron-Builder writes it's output to the folder: ```dist\win-unpacked```. In Visual Studio, I created the folder ```ElectronExe``` and copied the files (and subfolders) from  ```dist\win-unpacked``` to this folder as **links**. Links are important, it allows the files to change and update as subsequent builds are done.  
+The electron app is included in the Packaging Project via linked files to the output files of ``Electron-Builder``. Electron-Builder writes it's output to the folder: ```dist\win-unpacked```. In the packaging project, we created the folder ```ElectronExe``` and copied the files (and subfolders) from  ```dist\win-unpacked``` to this folder as **links**. Links are important, it allows the files to change and update as subsequent builds are done.  
 
 ![files](files.png)
 
 ## Package.appxmanifest file:
 
-You will need to include the following Restricted Capabilities in the Package.appxmanifest file:
+You will need to include the following *Restricted Capabilities* in the Package.appxmanifest file:
 
 ```xml
 xmlns:rescap=http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities
