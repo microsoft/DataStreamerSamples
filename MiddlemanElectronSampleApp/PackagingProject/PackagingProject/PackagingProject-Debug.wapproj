@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition="'$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '15.0'">
+    <VisualStudioVersion>15.0</VisualStudioVersion>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x86">
+      <Configuration>Debug</Configuration>
+      <Platform>x86</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x86">
+      <Configuration>Release</Configuration>
+      <Platform>x86</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|AnyCPU">
+      <Configuration>Debug</Configuration>
+      <Platform>AnyCPU</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|AnyCPU">
+      <Configuration>Release</Configuration>
+      <Platform>AnyCPU</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Configuration">
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <WapProjPath Condition="'$(WapProjPath)'==''">$(MSBuildExtensionsPath)\Microsoft\DesktopBridge\</WapProjPath>
+  </PropertyGroup>
+  <Import Project="$(WapProjPath)\Microsoft.DesktopBridge.props" />
+  <PropertyGroup>
+    <ProjectGuid>737f4d97-982b-41fe-8abb-fa762c6b0529</ProjectGuid>
+    <TargetPlatformVersion>10.0.17134.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.17134.0</TargetPlatformMinVersion>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <PackageCertificateKeyFile>PackagingProject_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <EntryPointProjectUniqueName>..\..\AppServiceHost\AppServiceUWP\AppServiceUWP.csproj</EntryPointProjectUniqueName>
+    <PackageCertificateThumbprint>29E3D9E9DE20D919F36EB430F9B40A7DBF4142B7</PackageCertificateThumbprint>
+  </PropertyGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest">
+      <SubType>Designer</SubType>
+    </AppxManifest>
+    <None Include="PackagingProject_TemporaryKey.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\..\Electron\index.html">
+      <Link>index.html</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\main.js">
+      <Link>main.js</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\package.json">
+      <Link>package.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\renderer.js">
+      <Link>renderer.js</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <!-- link -->
+    <Content Include="..\..\Electron\node_modules\electron\dist\v8_context_snapshot.bin">
+      <Link>node_modules\electron\dist\v8_context_snapshot.bin</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\node_modules\electron\dist\resources\electron.asar">
+      <Link>node_modules\electron\dist\resources\electron.asar</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\node_modules\electron\dist\resources\default_app.asar">
+      <Link>node_modules\electron\dist\resources\default_app.asar</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\node_modules\electron\dist\resources.pak">
+      <Link>node_modules\electron\dist\resources.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\node_modules\electron\dist\natives_blob.bin">
+      <Link>node_modules\electron\dist\natives_blob.bin</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\node_modules\electron\dist\locales\en-US.pak">
+      <Link>node_modules\electron\dist\locales\en-US.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\node_modules\electron\dist\libGLESv2.dll">
+      <Link>node_modules\electron\dist\libGLESv2.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\node_modules\electron\dist\libEGL.dll">
+      <Link>node_modules\electron\dist\libEGL.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\node_modules\electron\dist\icudtl.dat">
+      <Link>node_modules\electron\dist\icudtl.dat</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\node_modules\electron\dist\ffmpeg.dll">
+      <Link>node_modules\electron\dist\ffmpeg.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\node_modules\electron\dist\electron.exe">
+      <Link>node_modules\electron\dist\electron.exe</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\node_modules\electron\dist\d3dcompiler_47.dll">
+      <Link>node_modules\electron\dist\d3dcompiler_47.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\node_modules\electron\dist\chrome_200_percent.pak">
+      <Link>node_modules\electron\dist\chrome_200_percent.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\node_modules\electron\dist\chrome_100_percent.pak">
+      <Link>node_modules\electron\dist\chrome_100_percent.pak</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\node_modules\@nodert-win10-rs4\windows.foundation\package.json">
+      <Link>node_modules\@nodert-win10-rs4\windows.foundation\package.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\node_modules\@nodert-win10-rs4\windows.foundation\lib\main.js">
+      <Link>node_modules\@nodert-win10-rs4\windows.foundation\lib\main.js</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\node_modules\@nodert-win10-rs4\windows.foundation\build\Release\binding.node">
+      <Link>node_modules\@nodert-win10-rs4\windows.foundation\build\Release\binding.node</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\node_modules\@nodert-win10-rs4\windows.foundation.collections\package.json">
+      <Link>node_modules\@nodert-win10-rs4\windows.foundation.collections\package.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\node_modules\@nodert-win10-rs4\windows.foundation.collections\lib\main.js">
+      <Link>node_modules\@nodert-win10-rs4\windows.foundation.collections\lib\main.js</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\node_modules\@nodert-win10-rs4\windows.foundation.collections\build\Release\binding.node">
+      <Link>node_modules\@nodert-win10-rs4\windows.foundation.collections\build\Release\binding.node</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\node_modules\@nodert-win10-rs4\windows.applicationmodel\package.json">
+      <Link>node_modules\@nodert-win10-rs4\windows.applicationmodel\package.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\node_modules\@nodert-win10-rs4\windows.applicationmodel\lib\main.js">
+      <Link>node_modules\@nodert-win10-rs4\windows.applicationmodel\lib\main.js</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\node_modules\@nodert-win10-rs4\windows.applicationmodel\build\Release\binding.node">
+      <Link>node_modules\@nodert-win10-rs4\windows.applicationmodel\build\Release\binding.node</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\node_modules\@nodert-win10-rs4\windows.applicationmodel.appservice\package.json">
+      <Link>node_modules\@nodert-win10-rs4\windows.applicationmodel.appservice\package.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\node_modules\@nodert-win10-rs4\windows.applicationmodel.appservice\lib\main.js">
+      <Link>node_modules\@nodert-win10-rs4\windows.applicationmodel.appservice\lib\main.js</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Electron\node_modules\@nodert-win10-rs4\windows.applicationmodel.appservice\build\Release\binding.node">
+      <Link>node_modules\@nodert-win10-rs4\windows.applicationmodel.appservice\build\Release\binding.node</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <!-- end link-->
+    <Content Include="Images\LockScreenLogo.scale-200.png" />
+    <Content Include="Images\Square150x150Logo.scale-200.png" />
+    <Content Include="Images\Square44x44Logo.scale-200.png" />
+    <Content Include="Images\Square44x44Logo.targetsize-24_altform-unplated.png" />
+    <Content Include="Images\StoreLogo.png" />
+    <Content Include="Images\Wide310x150Logo.scale-200.png" />
+    <None Include="Package.StoreAssociation.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\AppServiceHost\AppServiceUWP\AppServiceUWP.csproj">
+      <DesktopBridgeSelfContained>false</DesktopBridgeSelfContained>
+    </ProjectReference>
+    <ProjectReference Include="..\ElectronLauncher\ElectronLauncher.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="node_modules\Electron\dist\" />
+  </ItemGroup>
+  <Import Project="$(WapProjPath)\Microsoft.DesktopBridge.targets" />
+</Project>
