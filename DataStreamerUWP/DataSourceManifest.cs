@@ -17,6 +17,10 @@ using System.Threading.Tasks;
 
 namespace Microsoft.DataStreamer.UWP
 {
+    /// <summary>
+    /// Object model for a manifest to be sent to Data Streamer. A manifest gives Data Streamer information about this 
+    ///   application and the data it will send.
+    /// <summary>
     public class DataSourceManifest
     {
         public string         Id            { get; set; }
@@ -26,6 +30,9 @@ namespace Microsoft.DataStreamer.UWP
         public IList<Channel> Channels      { get; set; } = new List<Channel>();
         public IList<Command> Commands      { get; set;} = new List<Command>();
  
+        /// <summary>
+        /// A command is a procedure this application can perform which can be called from Data Streamer
+        /// <summary>
         public class Command
         {
             public string         Name              { get; set;}
@@ -63,10 +70,13 @@ namespace Microsoft.DataStreamer.UWP
         }
    }
 
+    /// <summary>
+    /// A Channel describes the data sent in a single column
+    /// <summary>
     public class Channel
     {
+        public string Id            { get; set; }
         public string Name          { get; set; }
-        public string ShortName     { get; set; }
         public string Description   { get; set; }
         public string UnitOfMeasure { get; set; }
         public bool   Active        { get; set; } = true;

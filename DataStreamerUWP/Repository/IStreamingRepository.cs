@@ -17,9 +17,19 @@ using System.Threading.Tasks;
 
 namespace Microsoft.DataStreamer.UWP
 {
+    /// <summary>
+    /// Interface for classes that supply data for streaming
+    /// <summary>
     public interface IStreamingRepository
     {
-        Task<string>        GetData();
+        /// <summary>
+        /// Gets an individual line of data
+        /// <summary>
+        Task<string> GetData();
+
+        /// <summary>
+        /// Return the manifest for this application
+        /// <summary>
         DataSourceManifest  Manifest { get; }
     }
 }

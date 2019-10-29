@@ -22,7 +22,6 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
-using DataStreamer.App.Core;
 using Microsoft.DataStreamer.UWP;
 using System.ComponentModel;
 using Windows.UI.Core;
@@ -39,7 +38,6 @@ namespace Microsoft.DataStreamer.Samples.EarthquakeSimulator
     {
         public static AppServiceConnection DataStreamerConnection;
         private BackgroundTaskDeferral _appServiceDeferral;
-        public static bool IsConnectedToDataStreamerAppService;
         private static App _instance;
 
         private EarthquakeService _service;
@@ -151,7 +149,7 @@ namespace Microsoft.DataStreamer.Samples.EarthquakeSimulator
             AppServiceTriggerDetails appService = taskInstance.TriggerDetails as AppServiceTriggerDetails;
             _appServiceDeferral = taskInstance.GetDeferral();
             taskInstance.Canceled += OnAppServicesCanceled;
-            DataStreamerConnection = appService.AppServiceConnection;
+             _service.Connection = DataStreamerConnection = appService.AppServiceConnection;
             DataStreamerConnection.RequestReceived += OnAppServiceRequestReceived;
             DataStreamerConnection.ServiceClosed += AppServiceConnection_ServiceClosed;
         }
@@ -202,7 +200,6 @@ namespace Microsoft.DataStreamer.Samples.EarthquakeSimulator
                         DataStreamerConnection = sender;
                         returnData.Add("Result", result); 
                         await args.Request.SendResponseAsync(returnData);
-                        IsConnectedToDataStreamerAppService = true;
 
                         await this.ViewModel.ClearOutput();
                         await this.ViewModel.SetDataStreamerStatus("NotReady");

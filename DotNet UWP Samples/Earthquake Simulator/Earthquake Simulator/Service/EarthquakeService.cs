@@ -16,15 +16,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-using Windows.ApplicationModel.AppService;
-using Windows.Foundation.Collections;
-
-using DataStreamer.App.Core;
-
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Serialization;
-
 using Microsoft.DataStreamer.UWP;
 
 namespace Microsoft.DataStreamer.Samples.EarthquakeSimulator

@@ -138,7 +138,7 @@ namespace Microsoft.DataStreamer.Samples.EarthquakeSimulator
             {
                 new Channel { 
                                 Name          = "Seismometer",
-                                ShortName     = "SEIS",
+                                Id     = "SEIS",
                                 Description   = "A measurement of the vertical ground motion in g's",
                                 UnitOfMeasure = "g's"
                             }                

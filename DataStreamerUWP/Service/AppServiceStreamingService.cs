@@ -19,16 +19,15 @@ using System.Threading.Tasks;
 using Windows.ApplicationModel.AppService;
 using Windows.Foundation.Collections;
 
-using DataStreamer.App.Core;
-
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 
-using Microsoft.DataStreamer.UWP;
-
-namespace Microsoft.DataStreamer.Samples.EarthquakeSimulator
+namespace Microsoft.DataStreamer.UWP
 {
+    /// <summary>
+    /// A streaming service for a UWP AppService
+    /// </summary>
     public class AppServiceStreamingService : StreamingService
     {
         private int _lastId = 0;
@@ -36,6 +35,8 @@ namespace Microsoft.DataStreamer.Samples.EarthquakeSimulator
         public AppServiceStreamingService(IStreamingRepository repository) : base(repository)
         {
         }
+
+        public AppServiceConnection Connection { get; set; }
 
         public override Task UpdateManifest()
         {
@@ -56,11 +57,10 @@ namespace Microsoft.DataStreamer.Samples.EarthquakeSimulator
                     { "Data", data }
                 };
 
-                await App.DataStreamerConnection.SendMessageAsync(message);
+                await this.Connection.SendMessageAsync(message);
             }
             catch (Exception)
             {
-                App.IsConnectedToDataStreamerAppService = false;
             }
         }
 
@@ -121,7 +121,7 @@ namespace Microsoft.DataStreamer.Samples.EarthquakeSimulator
                 { "Data", JsonConvert.SerializeObject(cmd) }
             };
 
-            await App.DataStreamerConnection.SendMessageAsync(message);
+            await this.Connection.SendMessageAsync(message);
         }
 
         public class Command

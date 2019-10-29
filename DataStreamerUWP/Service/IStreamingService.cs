@@ -17,6 +17,9 @@ using System.Threading.Tasks;
 
 namespace Microsoft.DataStreamer.UWP
 {
+    /// <summary>
+    /// Interface for services that communicate with Data Streamer
+    /// <summary>
     public interface IStreamingService
     {
         Task<string> Connect();

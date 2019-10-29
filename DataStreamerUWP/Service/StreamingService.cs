@@ -20,10 +20,11 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 
-using Microsoft.DataStreamer.UWP;
-
-namespace DataStreamer.App.Core
+namespace Microsoft.DataStreamer.UWP
 {
+    /// <summary>
+    /// Base class for services that stream data to Data Streamer. This base class will stream data from a supplied repository.
+    /// <summary>
     public abstract class StreamingService : IStreamingService
     {
         private CancellationTokenSource _cancellationToken = new CancellationTokenSource();
