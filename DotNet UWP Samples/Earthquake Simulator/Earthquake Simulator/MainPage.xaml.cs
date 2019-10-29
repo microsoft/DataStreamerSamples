@@ -11,6 +11,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -41,14 +42,28 @@ namespace Microsoft.DataStreamer.Samples.EarthquakeSimulator
             App.Instance.Dispatcher = this.Dispatcher;
         }
 
-        private void ButtonStartData_Click(object sender, RoutedEventArgs e)
+        private void ButtonStartEarthquake_Click(object sender, RoutedEventArgs e)
         {
-            App.Instance.StartEarthquake();
+            try
+            { 
+                App.Instance.StartEarthquake();
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine($"Exception while attempting to start earthquake: {ex.Message}");
+            }
         }
 
-        private void ButtonStopData_Click(object sender, RoutedEventArgs e)
+        private void ButtonStopEarthquake_Click(object sender, RoutedEventArgs e)
         {
-            App.Instance.StopEarthquake();
+            try
+            { 
+                App.Instance.StopEarthquake();
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine($"Exception while attempting to stop earthquake: {ex.Message}");
+            }
         }
 
         private async void ButtonStartRecording_Click(object sender, RoutedEventArgs e)
@@ -61,7 +76,7 @@ namespace Microsoft.DataStreamer.Samples.EarthquakeSimulator
             }
             catch(Exception ex)
             {
-                await Task.CompletedTask;
+                Debug.WriteLine($"Exception while attempting to start recording: {ex.Message}");
             }
         }
 
@@ -73,7 +88,7 @@ namespace Microsoft.DataStreamer.Samples.EarthquakeSimulator
             }
             catch(Exception ex)
             {
-                await Task.CompletedTask;
+                Debug.WriteLine($"Exception while attempting to stop recording: {ex.Message}");
             } 
         }
 
@@ -85,7 +100,7 @@ namespace Microsoft.DataStreamer.Samples.EarthquakeSimulator
             }
             catch(Exception ex)
             {
-                await Task.CompletedTask;
+                Debug.WriteLine($"Exception while attempting to reset Data Streamer: {ex.Message}");
             }
         }
 
@@ -93,36 +108,12 @@ namespace Microsoft.DataStreamer.Samples.EarthquakeSimulator
         {
             try
             { 
-                await App.Instance.ViewModel.SetOutputLines("");
+                await App.Instance.ViewModel.ClearOutput();
             }
             catch(Exception ex)
             {
-                await Task.CompletedTask;
+                Debug.WriteLine($"Exception while attempting clear output: {ex.Message}");
             }  
-        }
-        
-        private async void ButtonReady_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            { 
-                await App.StreamerService.Ready();
-            }
-            catch(Exception ex)
-            {
-                await Task.CompletedTask;
-            }
-        }        
-        
-        private async void ButtonNotReady_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            { 
-                await App.StreamerService.NotReady();
-            }
-            catch
-            {
-
-            }        
         }
 
         private async void buttonStartSeismometer_Click(object sender, RoutedEventArgs e)
@@ -133,7 +124,7 @@ namespace Microsoft.DataStreamer.Samples.EarthquakeSimulator
             }
             catch(Exception ex)
             {
-                await Task.CompletedTask;
+                Debug.WriteLine($"Exception while attempting to start data streaming: {ex.Message}");
             }        
         }
 
@@ -145,7 +136,7 @@ namespace Microsoft.DataStreamer.Samples.EarthquakeSimulator
             }
             catch(Exception ex)
             {
-                await Task.CompletedTask;
+                Debug.WriteLine($"Exception while attempting to stop data streaming: {ex.Message}");
             }         
         }
     }

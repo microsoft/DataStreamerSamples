@@ -32,8 +32,8 @@
                     </StackPanel>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                    <Button x:Name="buttonStartData"      Content="Start Earthquake" Style="{StaticResource CommandButton}" Click="ButtonStartData_Click" IsEnabled="{Binding IsStreaming}" />
-                    <Button x:Name="buttonStopData"       Content="Stop Earthquake"  Style="{StaticResource CommandButton}" Click="ButtonStopData_Click" IsEnabled="{Binding IsStreaming}"  />
+                    <Button x:Name="buttonStartEarthquake"      Content="Start Earthquake" Style="{StaticResource CommandButton}" Click="ButtonStartEarthquake_Click" IsEnabled="{Binding IsStreaming}" />
+                    <Button x:Name="buttonStopEarthquake"       Content="Stop Earthquake"  Style="{StaticResource CommandButton}" Click="ButtonStopEarthquake_Click" IsEnabled="{Binding IsStreaming}"  />
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,20,0,0">

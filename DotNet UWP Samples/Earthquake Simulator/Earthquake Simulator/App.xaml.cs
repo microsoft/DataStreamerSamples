@@ -204,18 +204,13 @@ namespace Microsoft.DataStreamer.Samples.EarthquakeSimulator
                         await args.Request.SendResponseAsync(returnData);
                         IsConnectedToDataStreamerAppService = true;
 
-                        try
-                        { 
-                            await this.ViewModel.SetOutputLines("");
-                            await this.ViewModel.SetDataStreamerStatus("NotReady");
-                            await this.ViewModel.SetDataStreamerApiVersion( message.ValueOrDefault("Version", "0.0").ToString());
-                            await this.ViewModel.SetDataStreamerAppVersion( message.ValueOrDefault("AppVersion", "0.0").ToString());
-                        }
-                        catch(Exception ex)
-                        {
-                        }
+                        await this.ViewModel.ClearOutput();
+                        await this.ViewModel.SetDataStreamerStatus("NotReady");
+                        await this.ViewModel.SetDataStreamerApiVersion( message.ValueOrDefault("Version", "0.0").ToString());
+                        await this.ViewModel.SetDataStreamerAppVersion( message.ValueOrDefault("AppVersion", "0.0").ToString());
 
                         break;
+
                     case "Read":
                         //Receive data from Data Streamer and show it in UWP Application
                         returnData = await ReadDataAsync();
@@ -224,6 +219,8 @@ namespace Microsoft.DataStreamer.Samples.EarthquakeSimulator
                         //Send data to Data Streamer
                         await WriteDataAsync(message["Data"] as string);
                         break;
+
+                    // Handle events/notifications from Data Streamer  
                     case "Event":
                     { 
                         var eventName = message["EventName"]?.ToString() ?? "";
@@ -240,16 +237,13 @@ namespace Microsoft.DataStreamer.Samples.EarthquakeSimulator
 
                         break;
                     }
+
                     case "Close":
-                        try
-                        { 
-                            await this.ViewModel.SetDataStreamerStatus("Not Connected");
-                            await this.ViewModel.SetDataStreamerApiVersion("");
-                            await this.ViewModel.SetDataStreamerAppVersion("");
-                        }
-                        catch(Exception ex)
-                        {
-                        }
+                        
+                        await this.ViewModel.SetDataStreamerStatus("Not Connected");
+                        await this.ViewModel.SetDataStreamerApiVersion("");
+                        await this.ViewModel.SetDataStreamerAppVersion("");
+ 
                         break;
 
                     default:

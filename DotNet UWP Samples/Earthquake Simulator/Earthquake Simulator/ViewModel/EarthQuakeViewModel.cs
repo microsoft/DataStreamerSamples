@@ -23,31 +23,38 @@ namespace Microsoft.DataStreamer.Samples.EarthquakeSimulator
 {
     public class EarthQuakeViewModel : DataStreamerViewModel
     {
-            private string _outputLines;
+            private StringBuilder _outputLines = new StringBuilder();
 
             public EarthQuakeViewModel()
             {
             }                           
             
-            public double PGA         { get; set; }
-            public double Duration    { get; set; }
-            public string OutputLines => _outputLines; 
+            public double PGA         { get; set; } = 5d;
+            public double Duration    { get; set; } = 10d;
+            public StringBuilder OutputLines => _outputLines; 
                
-            public async Task SetOutputLines(string lines)
+            
+            public async Task ClearOutput()
             { 
-                _outputLines = lines; 
+               _outputLines.Clear();
+
+                await OnPropertyChanged("OutputLines"); 
+            }            
+            
+            public async Task AppendLine(string line)
+            { 
+               _outputLines.AppendLine(line);
 
                 await OnPropertyChanged("OutputLines"); 
             }            
             
             public async Task AppendOutputLine(string val)
             { 
-                var outputLines = _outputLines + val + "\r\n"; 
                 var dispatcher  = this.Dispatcher;
 
                 await dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
                 {
-                    await this.SetOutputLines(outputLines);
+                    await this.AppendLine(val);
 
                 });
             }

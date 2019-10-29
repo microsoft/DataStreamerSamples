@@ -28,8 +28,13 @@ namespace DataStreamer.App.Core
     {
         private CancellationTokenSource _cancellationToken = new CancellationTokenSource();
         private readonly IStreamingRepository _repository;
-        private volatile int _delay = 20;
+        private volatile int _delay = 20; // In ms
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="repository">Source of data</param>
+        /// <param name="delay">Delay or interval at which data is sent in milliseconds</param>
         public StreamingService(IStreamingRepository repository, int delay = 20)
         {
             _repository = repository;
