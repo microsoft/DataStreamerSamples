@@ -19,12 +19,9 @@ namespace Microsoft.DataStreamer.Samples.EarthquakeSimulator
     {
         private string[]        _data;
         private string[]        _earthQuakedata;
-        private string[]        _sampleData;
         private int             _currentIndex = 0;
         private double          _pga          = 0d;
         private double          _duration     = 0d;
-        private double          _currentValue = 0d;
-        private bool            _ascension    = true;
         private DateTime        _start        = DateTime.MinValue;
         private readonly object _lock         = new object();
 
@@ -52,16 +49,6 @@ namespace Microsoft.DataStreamer.Samples.EarthquakeSimulator
             }
 
             _earthQuakedata = result.Replace("\r\n", "\n").Replace("\r", "\n").Split("\n", StringSplitOptions.RemoveEmptyEntries);
-
-            using(var stream = assembly.GetManifestResourceStream("Microsoft.DataStreamer.Samples.EarthquakeSimulator.Resources.Data.Sample Data2.csv"))
-            { 
-                using (StreamReader reader = new StreamReader(stream))
-                {
-                    result = reader.ReadToEnd();
-                }
-            }
-
-            _sampleData = result.Replace("\r\n", "\n").Replace("\r", "\n").Split("\n", StringSplitOptions.RemoveEmptyEntries);
         }
         
         private const double MaxSampleData = 1.94d;
@@ -86,8 +73,6 @@ namespace Microsoft.DataStreamer.Samples.EarthquakeSimulator
             {
                 _pga          = 0d;
                 _duration     = 0d;
-                _currentValue = 0d;
-                _ascension    = true;
                 _start        = DateTime.MinValue;
                 _currentIndex = 0;
             }

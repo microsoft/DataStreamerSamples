@@ -171,9 +171,6 @@
     <EmbeddedResource Include="Resources\Data\Sample Data.csv" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Data\Sample Data2.csv" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Resources\Data\Earthquake.csv" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
