@@ -9,7 +9,7 @@
   <Identity
     Name="7fb47020-59d5-468b-8a5e-4ba31f3eaa58"
     Publisher="CN=v-dolig"
-    Version="1.0.0.0" />
+    Version="1.0.1.0" />
 
   <mp:PhoneIdentity PhoneProductId="7fb47020-59d5-468b-8a5e-4ba31f3eaa58" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 

@@ -20,39 +20,41 @@ using Windows.UI.Core;
 
 namespace Microsoft.DataStreamer.UWP
 {
+    /// <summary>
+    /// Base view model for Data Streamer applications
+    /// </summary>
     public abstract class DataStreamerViewModel : INotifyPropertyChanged
     {
-        private string _dataStreamerApiVersion = "";
-        private string _dataStreamerAppVersion = "";
-        private string _dataStreamerStatus     = "Not Connected";
+        private string _apiVersion = "";
+        private string _appVersion = "";
+        private string _status     = "Not Connected";
 
         public DataStreamerViewModel()
         {
-
         }
 
-        public string DataStreamerApiVersion => _dataStreamerApiVersion;
-        public string DataStreamerAppVersion => _dataStreamerAppVersion;
-        public string DataStreamerStatus     => _dataStreamerStatus;
-        public bool   IsReady                => _dataStreamerStatus == "Ready";
-        public bool   IsStreaming            => _dataStreamerStatus == "Reading";
-        public bool   IsRecording            => _dataStreamerStatus == "Recording";
+        public string ApiVersion   => _apiVersion;
+        public string AppVersion   => _appVersion;
+        public string Status       => _status;
+        public bool   IsReady      => _status == "Ready";
+        public bool   IsStreaming  => _status == "Reading";
+        public bool   IsRecording  => _status == "Recording";
 
         public async Task SetDataStreamerApiVersion(string val)
         { 
-            _dataStreamerApiVersion = val;
+            _apiVersion = val;
             await OnPropertyChanged("DataStreamerApiVersion"); 
         }            
             
         public async Task SetDataStreamerAppVersion(string val)
         { 
-            _dataStreamerAppVersion = val;
+            _appVersion = val;
             await OnPropertyChanged("DataStreamerAppVersion"); 
         } 
                     
         public async Task SetDataStreamerStatus(string val)
         { 
-            _dataStreamerStatus = val;
+            _status = val;
             await OnPropertyChanged("DataStreamerStatus"); 
             await OnPropertyChanged("IsReady"); 
             await OnPropertyChanged("IsStreaming"); 
@@ -61,7 +63,11 @@ namespace Microsoft.DataStreamer.UWP
         
         public CoreDispatcher Dispatcher { get; set; }
 
+        #region INotifyPropertyChanged
+
         public event PropertyChangedEventHandler PropertyChanged;
+
+        #endregion 
 
         protected async Task OnPropertyChanged(string name)
         { 

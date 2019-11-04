@@ -1,2 +1,2 @@
-MainPackage=C:\Development\DataStreamerSamples\DotNet UWP Samples\Earthquake Simulator\Earthquake Simulator\bin\x86\Debug\Earthquake Simulator_1.0.0.0_x86_Debug.msix
-SymbolPackage=C:\Development\DataStreamerSamples\DotNet UWP Samples\Earthquake Simulator\Earthquake Simulator\obj\x86\Debug\Symbols\Earthquake Simulator_1.0.0.0_x86_Debug.appxsym
+MainPackage=C:\Development\DataStreamerSamples\DotNet UWP Samples\Earthquake Simulator\Earthquake Simulator\bin\x86\Release\Earthquake Simulator_1.0.1.0_x86.msix
+SymbolPackage=C:\Development\DataStreamerSamples\DotNet UWP Samples\Earthquake Simulator\Earthquake Simulator\obj\x86\Release\Symbols\Earthquake Simulator_1.0.1.0_x86.appxsym
