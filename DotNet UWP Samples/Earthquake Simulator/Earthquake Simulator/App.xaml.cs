@@ -168,9 +168,9 @@ namespace Microsoft.DataStreamer.Samples.EarthquakeSimulator
 
             try
             { 
-                await this.ViewModel.SetDataStreamerStatus("Not Connected");
-                await this.ViewModel.SetDataStreamerAppVersion("");
-                await this.ViewModel.SetDataStreamerApiVersion("");
+                await this.ViewModel.SetStatus("Not Connected");
+                await this.ViewModel.SetAppVersion("");
+                await this.ViewModel.SetApiVersion("");
             }
             catch(Exception ex)
             {
@@ -202,9 +202,9 @@ namespace Microsoft.DataStreamer.Samples.EarthquakeSimulator
                         await args.Request.SendResponseAsync(returnData);
 
                         await this.ViewModel.ClearOutput();
-                        await this.ViewModel.SetDataStreamerStatus("NotReady");
-                        await this.ViewModel.SetDataStreamerApiVersion( message.ValueOrDefault("Version", "0.0").ToString());
-                        await this.ViewModel.SetDataStreamerAppVersion( message.ValueOrDefault("AppVersion", "0.0").ToString());
+                        await this.ViewModel.SetStatus("NotReady");
+                        await this.ViewModel.SetApiVersion( message.ValueOrDefault("Version", "0.0").ToString());
+                        await this.ViewModel.SetAppVersion( message.ValueOrDefault("AppVersion", "0.0").ToString());
 
                         break;
 
@@ -224,10 +224,13 @@ namespace Microsoft.DataStreamer.Samples.EarthquakeSimulator
 
                         if(eventName == "OnStatusUpdate")
                         {
-                            var status = message["Status"]?.ToString() ?? "";
+                            if(this.ViewModel.Status != "Not Connected")
+                            { 
+                                var status = message["Status"]?.ToString() ?? "";
 
-                            await this.ViewModel.SetDataStreamerStatus(status);
-                            await this.ViewModel.AppendOutputLine("Status: " + status);
+                                await this.ViewModel.SetStatus(status);
+                                await this.ViewModel.AppendOutputLine("Status: " + status);
+                            }
                         }
                         else
                            await this.ViewModel.AppendOutputLine(" Event: " + eventName);
@@ -237,9 +240,9 @@ namespace Microsoft.DataStreamer.Samples.EarthquakeSimulator
 
                     case "Close":
                         
-                        await this.ViewModel.SetDataStreamerStatus("Not Connected");
-                        await this.ViewModel.SetDataStreamerApiVersion("");
-                        await this.ViewModel.SetDataStreamerAppVersion("");
+                        await this.ViewModel.SetStatus("Not Connected");
+                        await this.ViewModel.SetApiVersion("");
+                        await this.ViewModel.SetAppVersion("");
  
                         break;
 

@@ -40,22 +40,22 @@ namespace Microsoft.DataStreamer.UWP
         public bool   IsStreaming  => _status == "Reading";
         public bool   IsRecording  => _status == "Recording";
 
-        public async Task SetDataStreamerApiVersion(string val)
+        public async Task SetApiVersion(string val)
         { 
             _apiVersion = val;
-            await OnPropertyChanged("DataStreamerApiVersion"); 
+            await OnPropertyChanged("ApiVersion"); 
         }            
             
-        public async Task SetDataStreamerAppVersion(string val)
+        public async Task SetAppVersion(string val)
         { 
             _appVersion = val;
-            await OnPropertyChanged("DataStreamerAppVersion"); 
+            await OnPropertyChanged("AppVersion"); 
         } 
                     
-        public async Task SetDataStreamerStatus(string val)
+        public async Task SetStatus(string val)
         { 
             _status = val;
-            await OnPropertyChanged("DataStreamerStatus"); 
+            await OnPropertyChanged("Status"); 
             await OnPropertyChanged("IsReady"); 
             await OnPropertyChanged("IsStreaming"); 
             await OnPropertyChanged("IsRecording"); 

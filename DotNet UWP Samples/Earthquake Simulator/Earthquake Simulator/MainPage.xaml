@@ -53,15 +53,15 @@
             <StackPanel Orientation="Vertical" Margin="40, 0, 0, 0" Grid.Row="1" Grid.Column="0">
                 <StackPanel Margin="10,0,0,0" Orientation="Horizontal">
                     <TextBlock Text="Status" Style="{StaticResource VersionLabel}" />
-                    <TextBlock Text="{Binding DataStreamerStatus, Mode=TwoWay}" Style="{StaticResource VersionText}" />
+                    <TextBlock Text="{Binding Status, Mode=TwoWay}" Style="{StaticResource VersionText}" />
                 </StackPanel>
                 <StackPanel Margin="10,0,0,0" Orientation="Horizontal">
                     <TextBlock Text="App Version" Style="{StaticResource VersionLabel}" />
-                    <TextBlock Text="{Binding DataStreamerAppVersion, Mode=TwoWay}" Style="{StaticResource VersionText}" />
+                    <TextBlock Text="{Binding AppVersion, Mode=TwoWay}" Style="{StaticResource VersionText}" />
                 </StackPanel>
                 <StackPanel Margin="10,0,0,0" Orientation="Horizontal">
                     <TextBlock Text="API Version" Style="{StaticResource VersionLabel}" />
-                    <TextBlock Text="{Binding DataStreamerApiVersion, Mode=TwoWay}" Style="{StaticResource VersionText}" />
+                    <TextBlock Text="{Binding ApiVersion, Mode=TwoWay}" Style="{StaticResource VersionText}" />
                 </StackPanel>
             </StackPanel>
             <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="0" Background="Black" Margin="30,10,30,20">
