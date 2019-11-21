@@ -22,16 +22,17 @@ namespace Microsoft.DataStreamer.UWP
     /// <summary>
     public interface IStreamingService
     {
-        Task<string> Connect();
+        Task<string> Connect(IDictionary<string, object> mesage);
         Task         Disconnect();
 
         Task         StartData();
-        Task         StopData();
-        Task         StartRecording(string fileName);
-        Task         StopRecording();
+        Task         StopData(bool disconnecting = false);
+        Task         StartRecording(string fileName, Func<string, Task> fnOnError = null);
+        Task         StopRecording(Func<string, Task> fnOnError = null);
         Task         Reset();
         Task         Ready();
         Task         NotReady();
         Task         UpdateManifest();
+        Task         OnEvent(IDictionary<string, object> message);
     }
 }

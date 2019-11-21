@@ -10,43 +10,31 @@
 //*********************************************************
 
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
+using Windows.UI.Popups;
 
 namespace Microsoft.DataStreamer.Samples.EarthquakeSimulator
 {
     public sealed partial class MainPage : Page
     {
-        // default state is to send data
-
         public MainPage()
         {
             this.InitializeComponent();
 
-            this.DataContext = App.Instance.ViewModel;
-            App.Instance.Dispatcher = this.Dispatcher;
+            this.DataContext = App.ViewModel;
         }
 
         private void ButtonStartEarthquake_Click(object sender, RoutedEventArgs e)
         {
             try
             { 
-                App.Instance.StartEarthquake();
+                App.Service.StartEarthquake();
             }
             catch(Exception ex)
             {
@@ -58,7 +46,7 @@ namespace Microsoft.DataStreamer.Samples.EarthquakeSimulator
         {
             try
             { 
-                App.Instance.StopEarthquake();
+                App.Service.StopEarthquake();
             }
             catch(Exception ex)
             {
@@ -72,7 +60,7 @@ namespace Microsoft.DataStreamer.Samples.EarthquakeSimulator
             { 
                 var docs = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
-                await App.StreamerService.StartRecording(Path.Combine(docs, "DataStreamer", "Earthquake.csv"));
+                await App.Service.StartRecording(Path.Combine(docs, "DataStreamer", "Earthquake_" + DateTime.Now.ToString("yyyyMMddhhmmssfff") + ".csv"), DispatchShowError);
             }
             catch(Exception ex)
             {
@@ -84,7 +72,7 @@ namespace Microsoft.DataStreamer.Samples.EarthquakeSimulator
         {
             try
             { 
-                await App.StreamerService.StopRecording();
+                await App.Service.StopRecording(DispatchShowError);
             }
             catch(Exception ex)
             {
@@ -96,7 +84,7 @@ namespace Microsoft.DataStreamer.Samples.EarthquakeSimulator
         {
             try
             { 
-                await App.StreamerService.Reset();
+                await App.Service.Reset();
             }
             catch(Exception ex)
             {
@@ -108,7 +96,7 @@ namespace Microsoft.DataStreamer.Samples.EarthquakeSimulator
         {
             try
             { 
-                await App.Instance.ViewModel.ClearOutput();
+                await App.Service.ClearOutput();
             }
             catch(Exception ex)
             {
@@ -120,7 +108,7 @@ namespace Microsoft.DataStreamer.Samples.EarthquakeSimulator
         {
             try
             { 
-                await App.StreamerService.StartData();
+                await App.Service.StartData();
             }
             catch(Exception ex)
             {
@@ -132,12 +120,27 @@ namespace Microsoft.DataStreamer.Samples.EarthquakeSimulator
         {
             try
             { 
-                await App.StreamerService.StopData();
+                await App.Service.StopData();
             }
             catch(Exception ex)
             {
                 Debug.WriteLine($"Exception while attempting to stop data streaming: {ex.Message}");
             }         
+        }
+
+        private async Task ShowError(string msg)
+        {
+            var messageDialog = new MessageDialog(msg, "Earthquake Simulator");
+
+            await messageDialog.ShowAsync();
+        }
+
+        private async Task DispatchShowError(string msg)
+        {
+            await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async ()=>
+            { 
+                await ShowError(msg);
+            });
         }
     }
 

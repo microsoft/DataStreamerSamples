@@ -29,11 +29,10 @@ namespace Microsoft.DataStreamer.Samples.EarthquakeSimulator
             {
             }                           
             
-            public double PGA         { get; set; } = 5d;
-            public double Duration    { get; set; } = 10d;
+            public double        PGA         { get; set; } = 5d;
+            public double        Duration    { get; set; } = 10d;
             public StringBuilder OutputLines => _outputLines; 
-               
-            
+                           
             public async Task ClearOutput()
             { 
                _outputLines.Clear();

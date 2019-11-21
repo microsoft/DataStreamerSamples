@@ -42,7 +42,7 @@ namespace Microsoft.DataStreamer.UWP
             _delay = delay;
         }
 
-        public virtual async Task<string> Connect()
+        public virtual async Task<string> Connect(IDictionary<string, object> mesage)
         {
             return await Task.FromResult(JsonConvert.SerializeObject(_repository.Manifest));
         }
@@ -51,8 +51,7 @@ namespace Microsoft.DataStreamer.UWP
 
         public virtual async Task Disconnect()
         {
-            await StopData();
-            await Task.CompletedTask;
+            await StopData(true);
         }
 
         public int Delay { get { return _delay; } set {_delay = value; } }
@@ -61,7 +60,7 @@ namespace Microsoft.DataStreamer.UWP
         {
             _cancellationToken = new CancellationTokenSource();
 
-            Task.Run( async ()=>
+            _ = Task.Run( async ()=>
             {
                 while(!_cancellationToken.Token.IsCancellationRequested)
                 {
@@ -77,7 +76,7 @@ namespace Microsoft.DataStreamer.UWP
             await Task.CompletedTask;
         }
 
-        public virtual async Task StopData()
+        public virtual async Task StopData(bool disconnecting = false)
         {
             _cancellationToken?.Cancel();
             await Task.CompletedTask;
@@ -85,11 +84,12 @@ namespace Microsoft.DataStreamer.UWP
 
         protected abstract Task SendData(string data);
 
-        public abstract Task StartRecording(string fileName);
-        public abstract Task StopRecording();
+        public abstract Task StartRecording(string fileName, Func<string, Task> fnOnError = null);
+        public abstract Task StopRecording(Func<string, Task> fnOnError = null);
         public abstract Task Reset();
         public abstract Task Ready();
         public abstract Task NotReady();
         public abstract Task UpdateManifest();
+        public abstract Task OnEvent(IDictionary<string, object> message);
     }
 }

@@ -1,36 +1,27 @@
-﻿//*********************************************************
-//
-// Copyright (c) Microsoft. All rights reserved.
-// This code is licensed under the MIT License (MIT).
-// THIS CODE IS PROVIDED AS IS WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
-// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
-// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
-//
-//*********************************************************
-
-using System;
-
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.Foundation;
+using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-using Microsoft.DataStreamer.UWP;
-
-namespace Microsoft.DataStreamer.Samples.EarthquakeSimulator
+namespace DeleteMe
 {
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
-    public sealed partial class App : Application
+    sealed partial class App : Application
     {
-        private static App _instance;
-
-        private readonly DataStreamerAppService _dataStreamerAppService;
-        private readonly EarthquakeService _service;
-
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -39,16 +30,7 @@ namespace Microsoft.DataStreamer.Samples.EarthquakeSimulator
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
-            _instance = this;
-
-            _service = new EarthquakeService(new EarthquakeRepository(), new EarthQuakeViewModel());
-
-            _dataStreamerAppService = new DataStreamerAppService(_service);
         }
-
-        public static App                 Instance  => _instance;
-        public static EarthquakeService   Service   => _instance._service;
-        public static EarthQuakeViewModel ViewModel => _instance._service.ViewModel;
 
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points
@@ -111,19 +93,8 @@ namespace Microsoft.DataStreamer.Samples.EarthquakeSimulator
         private void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
-
+            //TODO: Save application state and stop any background activity
             deferral.Complete();
         }
-        
-        /// <summary>
-        /// Handle background activation (connecting to app service)
-        /// </summary>
-        /// <param name="args">Event arguments</param>
-        protected override void OnBackgroundActivated(BackgroundActivatedEventArgs args)
-        {
-            base.OnBackgroundActivated(args);
-
-            _dataStreamerAppService.Run(args.TaskInstance);
-        }
     }
- }
+}

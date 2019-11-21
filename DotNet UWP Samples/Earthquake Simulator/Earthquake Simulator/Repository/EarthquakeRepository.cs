@@ -28,42 +28,24 @@ namespace Microsoft.DataStreamer.Samples.EarthquakeSimulator
 {
     public class EarthquakeRepository : IStreamingRepository
     {
-        private string[]        _data;
+        private string[]        _backgroundData;
         private string[]        _earthQuakedata;
         private int             _currentIndex = 0;
         private double          _pga          = 0d;
         private double          _duration     = 0d;
         private DateTime        _start        = DateTime.MinValue;
         private readonly object _lock         = new object();
+        private const double    MaxSampleData = 1.94d;
 
         public EarthquakeRepository()
         {
-            var assembly = Assembly.GetExecutingAssembly();
-            var result   = "";
+            // Background seismic data
+            _backgroundData = LoadSeismicData("Microsoft.DataStreamer.Samples.EarthquakeSimulator.Resources.Data.Sample Data.csv");
 
-            using(var stream = assembly.GetManifestResourceStream("Microsoft.DataStreamer.Samples.EarthquakeSimulator.Resources.Data.Sample Data.csv"))
-            { 
-                using (StreamReader reader = new StreamReader(stream))
-                {
-                    result = reader.ReadToEnd();
-                }
-            }
-
-            _data = result.Replace("\r\n", "\n").Replace("\r", "\n").Split("\n", StringSplitOptions.RemoveEmptyEntries);
-
-            using(var stream = assembly.GetManifestResourceStream("Microsoft.DataStreamer.Samples.EarthquakeSimulator.Resources.Data.Earthquake.csv"))
-            { 
-                using (StreamReader reader = new StreamReader(stream))
-                {
-                    result = reader.ReadToEnd();
-                }
-            }
-
-            _earthQuakedata = result.Replace("\r\n", "\n").Replace("\r", "\n").Split("\n", StringSplitOptions.RemoveEmptyEntries);
+            // Earthquake seismic data
+            _earthQuakedata = LoadSeismicData("Microsoft.DataStreamer.Samples.EarthquakeSimulator.Resources.Data.Earthquake.csv");
         }
         
-        private const double MaxSampleData = 1.94d;
-
         public void StartEarthquake(double pga, double duration)
         {
             if(pga == 0d)
@@ -89,12 +71,14 @@ namespace Microsoft.DataStreamer.Samples.EarthquakeSimulator
             }
         }
 
+        #region IStreamingRepository
+
         public async Task<string> GetData()
         {
-            double pga      = 0d;
-            double duration = 0d;
-            var    data     = _data;
-            double factor   = 1d;
+            var pga      = 0d;
+            var duration = 0d;
+            var data     = _backgroundData;
+            var factor   = 1d;
 
             lock(_lock)
             {
@@ -102,6 +86,7 @@ namespace Microsoft.DataStreamer.Samples.EarthquakeSimulator
                 duration = _duration;
             }
 
+            // We're in the middle of an earthquake
             if(pga != 0d)
             {
                 if((DateTime.Now - _start).TotalSeconds > duration)
@@ -127,6 +112,10 @@ namespace Microsoft.DataStreamer.Samples.EarthquakeSimulator
             return await Task.FromResult("");
         }
 
+        public DataSourceManifest Manifest => _manifest;
+
+        #endregion
+
         #region Manifest
 
         private readonly DataSourceManifest _manifest = new DataSourceManifest
@@ -138,14 +127,31 @@ namespace Microsoft.DataStreamer.Samples.EarthquakeSimulator
             {
                 new Channel { 
                                 Name          = "Seismometer",
-                                Id     = "SEIS",
+                                Id            = "SEIS",
                                 Description   = "A measurement of the vertical ground motion in g's",
                                 UnitOfMeasure = "g's"
                             }                
             }
         };
 
-        public DataSourceManifest Manifest => _manifest;
+        #endregion
+
+        #region Private
+
+        private static string[] LoadSeismicData(string fileName)
+        {
+            var result   = "";
+
+            using(var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(fileName))
+            { 
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    result = reader.ReadToEnd();
+                }
+            }
+
+            return result.Replace("\r\n", "\n").Replace("\r", "\n").Split("\n", StringSplitOptions.RemoveEmptyEntries);
+        }
 
         #endregion
     }

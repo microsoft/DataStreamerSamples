@@ -22,13 +22,15 @@ using Windows.Foundation.Collections;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
+using System.Diagnostics;
+using System.Xml.XPath;
 
 namespace Microsoft.DataStreamer.UWP
 {
     /// <summary>
     /// A streaming service for a UWP AppService
     /// </summary>
-    public class AppServiceStreamingService : StreamingService
+    public abstract class AppServiceStreamingService : StreamingService
     {
         private int _lastId = 0;
 
@@ -59,8 +61,9 @@ namespace Microsoft.DataStreamer.UWP
 
                 await this.Connection.SendMessageAsync(message);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _ = ex.Message;
             }
         }
 
@@ -70,20 +73,22 @@ namespace Microsoft.DataStreamer.UWP
             await SendRPCCommand("StartData");
         }
 
-        public override async Task StopData()
+        public override async Task StopData(bool disconnecting = false)
         {
             await base.StopData();
-            await SendRPCCommand("StopData");
+
+            if(!disconnecting)
+                await SendRPCCommand("StopData");
         }
         
-        public override async Task StartRecording(string fileName)
+        public override async Task StartRecording(string fileName, Func<string, Task> fnOnError = null)
         {
-            await SendRPCCommand("StartRecording", new { path = fileName });
+            await SendRPCCommand("StartRecording", new { path = fileName }, fnOnError);
         }
 
-        public override async Task StopRecording()
+        public override async Task StopRecording(Func<string, Task> fnOnError = null)
         {
-            await SendRPCCommand("StopRecording");
+            await SendRPCCommand("StopRecording", null, fnOnError);
         }
 
         public override async Task Reset()
@@ -101,7 +106,7 @@ namespace Microsoft.DataStreamer.UWP
             await SendRPCCommand("SetStatus", new {status = "appnotready"} );
         }
 
-        private async Task SendRPCCommand(string command, object oParams = null)
+        private async Task SendRPCCommand(string command, object oParams = null, Func<string, Task> fnOnError = null)
         {
             var cmd = new Command
             {
@@ -121,9 +126,40 @@ namespace Microsoft.DataStreamer.UWP
                 { "Data", JsonConvert.SerializeObject(cmd) }
             };
 
-            await this.Connection.SendMessageAsync(message);
+            // Run asynchronously
+            _ = Task.Run( async()=>
+            {
+                try
+                { 
+                    var result  = await this.Connection.SendMessageAsync(message);
+                    var dParams = new Dictionary<string, object>(result.Message);
+
+                    if(dParams != null && result.Message.ContainsKey("Data"))
+                    {
+                        var json      = result.Message["Data"].ToString();
+                        var cmdResult = JsonConvert.DeserializeObject<CommandResult>(json);
+
+                        if(cmdResult.Error != null)
+                        { 
+                            Debug.WriteLine(cmdResult.Error.Message);
+
+                            if(fnOnError != null)
+                                await fnOnError(cmdResult.Error.Message);
+                        }
+                    }
+                }
+                catch(Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                }
+            });
+
+            await Task.CompletedTask;
         }
 
+        /// <summary>
+        /// Serialize as a JSON RPC 2.0 command. See https://www.jsonrpc.org/specification
+        /// </summary>
         public class Command
         {
             [JsonProperty("jsonrpc")]
@@ -139,5 +175,31 @@ namespace Microsoft.DataStreamer.UWP
             public JObject Params { get; set; }
         }
 
+       /// <summary>
+        /// Serialize as a JSON RPC 2.0 result set. See https://www.jsonrpc.org/specification
+        /// </summary>
+        public class CommandResult
+        {
+            [JsonProperty("jsonrpc")]
+            public string Version { get; set; } = "2.0";
+
+            [JsonProperty("id")]
+            public string Id { get; set; }
+
+            [JsonProperty("result")]
+            public string Result { get; set; }
+
+            [JsonProperty("error")]
+            public CommandError Error { get; set; }
+        }
+
+        public class CommandError
+        {
+            [JsonProperty("code")]
+            public string Code { get; set; }
+
+            [JsonProperty("message")]
+            public string Message { get; set; }
+        }    
     }
 }
