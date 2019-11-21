@@ -75,10 +75,10 @@ namespace Microsoft.DataStreamer.UWP
     /// <summary>
     public class Channel
     {
-        public string Id            { get; set; }
-        public string Name          { get; set; }
-        public string Description   { get; set; }
-        public string UnitOfMeasure { get; set; }
-        public bool   Active        { get; set; } = true;
+        public string         Id            { get; set; }
+        public string         Name          { get; set; }
+        public string         Description   { get; set; }
+        public string         UnitOfMeasure { get; set; }
+        public IList<Channel> SubChannels   { get; set; } = new List<Channel>();
     }
 }

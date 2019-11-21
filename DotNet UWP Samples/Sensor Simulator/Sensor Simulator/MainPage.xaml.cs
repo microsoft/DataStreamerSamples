@@ -19,8 +19,11 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Popups;
 
-namespace Microsoft.DataStreamer.Samples.EarthquakeSimulator
+namespace Microsoft.DataStreamer.Samples.SensorSimulator
 {
+    /// <summary>
+    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// </summary>
     public sealed partial class MainPage : Page
     {
         public MainPage()
@@ -31,37 +34,39 @@ namespace Microsoft.DataStreamer.Samples.EarthquakeSimulator
             this.DataContext = App.ViewModel;
         }
 
-        private void ButtonStartEarthquake_Click(object sender, RoutedEventArgs e)
+        #region Button Handlers
+
+        private async void buttonStartStreaming_Click(object sender, RoutedEventArgs e)
         {
             try
             { 
-                App.Service.StartEarthquake();
+                await App.Service.StartData();
             }
             catch(Exception ex)
             {
-                Debug.WriteLine($"Exception while attempting to start earthquake: {ex.Message}");
-            }
+                Debug.WriteLine($"Exception while attempting to start data streaming: {ex.Message}");
+            }        
         }
 
-        private void ButtonStopEarthquake_Click(object sender, RoutedEventArgs e)
+        private async void buttonStopStreaming_Click(object sender, RoutedEventArgs e)
         {
             try
             { 
-                App.Service.StopEarthquake();
+                await App.Service.StopData();
             }
             catch(Exception ex)
             {
-                Debug.WriteLine($"Exception while attempting to stop earthquake: {ex.Message}");
-            }
+                Debug.WriteLine($"Exception while attempting to stop data streaming: {ex.Message}");
+            }         
         }
-
+        
         private async void ButtonStartRecording_Click(object sender, RoutedEventArgs e)
         {
             try
             { 
                 var docs = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
-                await App.Service.StartRecording(Path.Combine(docs, "DataStreamer", "Earthquake_" + DateTime.Now.ToString("yyyyMMddhhmmssfff") + ".csv"), DispatchShowError);
+                await App.Service.StartRecording(Path.Combine(docs, "DataStreamer", "Sensors_" + DateTime.Now.ToString("yyyyMMddhhmmssfff") + ".csv"), DispatchShowError);
             }
             catch(Exception ex)
             {
@@ -105,33 +110,13 @@ namespace Microsoft.DataStreamer.Samples.EarthquakeSimulator
             }  
         }
 
-        private async void buttonStartSeismometer_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            { 
-                await App.Service.StartData();
-            }
-            catch(Exception ex)
-            {
-                Debug.WriteLine($"Exception while attempting to start data streaming: {ex.Message}");
-            }        
-        }
+        #endregion
 
-        private async void buttonStopSeismometer_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            { 
-                await App.Service.StopData();
-            }
-            catch(Exception ex)
-            {
-                Debug.WriteLine($"Exception while attempting to stop data streaming: {ex.Message}");
-            }         
-        }
+        #region Message Box
 
         private async Task ShowError(string msg)
         {
-            var messageDialog = new MessageDialog(msg, "Earthquake Simulator");
+            var messageDialog = new MessageDialog(msg, "Sensor Simulator");
 
             await messageDialog.ShowAsync();
         }
@@ -143,6 +128,7 @@ namespace Microsoft.DataStreamer.Samples.EarthquakeSimulator
                 await ShowError(msg);
             });
         }
-    }
 
+        #endregion
+    }
 }
