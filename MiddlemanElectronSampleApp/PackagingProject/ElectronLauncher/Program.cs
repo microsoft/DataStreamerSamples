@@ -14,9 +14,7 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Windows.ApplicationModel;
-using Windows.ApplicationModel.Core;
-using Windows.System;
+
 
 namespace LauncherExtension
 {

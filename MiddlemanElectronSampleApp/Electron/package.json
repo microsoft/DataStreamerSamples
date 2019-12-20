@@ -13,7 +13,7 @@
   "license": "ISC",
   "devDependencies": {
     "electron": "^4.2.2",
-    "electron-builder": "^20.40.2"
+    "electron-builder": "^20.44.4"
   },
   "dependencies": {
     "@nodert-win10-rs4/windows.applicationmodel": "^0.4.0",

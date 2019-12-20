@@ -41,12 +41,12 @@
   <Import Project="$(WapProjPath)\Microsoft.DesktopBridge.props" />
   <PropertyGroup>
     <ProjectGuid>737f4d97-982b-41fe-8abb-fa762c6b0529</ProjectGuid>
-    <TargetPlatformVersion>10.0.17134.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.17134.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.17763.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
     <DefaultLanguage>en-US</DefaultLanguage>
     <PackageCertificateKeyFile>PackagingProject_TemporaryKey.pfx</PackageCertificateKeyFile>
-    <EntryPointProjectUniqueName>..\..\AppServiceHost\AppServiceUWP\AppServiceUWP.csproj</EntryPointProjectUniqueName>
     <PackageCertificateThumbprint>29E3D9E9DE20D919F36EB430F9B40A7DBF4142B7</PackageCertificateThumbprint>
+    <EntryPointProjectUniqueName>..\..\AppServiceHost\AppServiceUWP\AppServiceUWP.csproj</EntryPointProjectUniqueName>
   </PropertyGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -186,13 +186,11 @@
     <None Include="Package.StoreAssociation.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\AppServiceHost\AppServiceUWP\AppServiceUWP.csproj">
-      <DesktopBridgeSelfContained>false</DesktopBridgeSelfContained>
-    </ProjectReference>
-    <ProjectReference Include="..\ElectronLauncher\ElectronLauncher.csproj" />
+    <Folder Include="node_modules\Electron\dist\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="node_modules\Electron\dist\" />
+    <ProjectReference Include="..\..\AppServiceHost\AppServiceUWP\AppServiceUWP.csproj" />
+    <ProjectReference Include="..\ElectronLauncher\ElectronLauncher.csproj" />
   </ItemGroup>
   <Import Project="$(WapProjPath)\Microsoft.DesktopBridge.targets" />
 </Project>
