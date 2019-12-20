@@ -18,6 +18,9 @@ cmd /c npm install --global --production windows-build-tools@4.0.0 -y
 choco install windows-sdk-10-version-1809-all -y
 rem choco install windows-sdk-10.1 --version=10.1.17134.12 -y
 
+:visualstudio
+for %%b in (community, -workload-manageddesktop, -workload-universal, -workload-nativedesktop) do choco install visualstudio2019%%b -y
+
 :eds
 cd electron
 cmd /c npm install --global --production windows-build-tools
