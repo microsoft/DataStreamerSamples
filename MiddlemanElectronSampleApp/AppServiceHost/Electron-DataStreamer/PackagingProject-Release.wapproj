@@ -61,13 +61,13 @@
     <TargetPlatformMinVersion>10.0.15063.0</TargetPlatformMinVersion>
     <DefaultLanguage>en-US</DefaultLanguage>
     <PackageCertificateKeyFile>PackagingProject-Release_StoreKey.pfx</PackageCertificateKeyFile>
-    <EntryPointProjectUniqueName>..\AppServiceUWP\AppServiceUWP.csproj</EntryPointProjectUniqueName>
     <PackageCertificateThumbprint>2337DA86A9CA0FEBB4055AB5A0F5556C6FC2FE8F</PackageCertificateThumbprint>
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <AppxBundlePlatforms>x86|x64</AppxBundlePlatforms>
     <AppInstallerUpdateFrequency>1</AppInstallerUpdateFrequency>
     <AppInstallerCheckForUpdateFrequency>OnApplicationRun</AppInstallerCheckForUpdateFrequency>
+    <EntryPointProjectUniqueName>..\AppServiceUWP\AppServiceUWP.csproj</EntryPointProjectUniqueName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <AppxBundle>Always</AppxBundle>
@@ -452,12 +452,17 @@
     <None Include="Package.StoreAssociation.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AppServiceUWP\AppServiceUWP.csproj" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="ElectronExe\locales\" />
     <Folder Include="ElectronExe\swiftshader\" />
     <Folder Include="ElectronExe\resources\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AppServiceUWP\AppServiceUWP.csproj" />
+  </ItemGroup>
   <Import Project="$(WapProjPath)\Microsoft.DesktopBridge.targets" />
+  <Target Name="_FixEntryPoint" AfterTargets="_ConvertItems">
+    <PropertyGroup>
+      <EntryPointExe>ElectronExe\GetStarted.exe</EntryPointExe>
+    </PropertyGroup>
+  </Target>
 </Project>

@@ -42,7 +42,7 @@
           Wide310x150Logo="Images\Wide310x150Logo.png" />
       </uap:VisualElements>
       <Extensions>
-        <uap:Extension Category="windows.appService">
+        <uap:Extension Category="windows.appService" EntryPoint="AppServiceWRC.MMAppService">
           <uap:AppService Name="com.microsoft.datastreamerconnect"/>
         </uap:Extension>
       </Extensions>
