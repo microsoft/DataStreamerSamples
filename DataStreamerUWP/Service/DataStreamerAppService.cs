@@ -93,7 +93,6 @@ namespace Microsoft.DataStreamer.UWP
 
                             await _service.OnCommand(command, parms);
 
-                            //returnData.Add("Status", "Fail: unknown command");
                             await args.Request.SendResponseAsync(returnData);
                             break;
                         }
