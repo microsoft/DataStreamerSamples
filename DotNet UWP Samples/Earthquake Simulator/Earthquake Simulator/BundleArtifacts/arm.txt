@@ -1,0 +1,2 @@
+MainPackage=C:\Development\DataStreamerSamples\DotNet UWP Samples\Earthquake Simulator\Earthquake Simulator\bin\ARM\Release\Earthquake Simulator_1.0.4.0_ARM.msix
+SymbolPackage=C:\Development\DataStreamerSamples\DotNet UWP Samples\Earthquake Simulator\Earthquake Simulator\obj\ARM\Release\Symbols\Earthquake Simulator_1.0.4.0_ARM.appxsym

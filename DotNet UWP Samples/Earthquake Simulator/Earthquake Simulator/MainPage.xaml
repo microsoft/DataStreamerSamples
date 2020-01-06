@@ -1,0 +1,81 @@
+﻿<Page
+    x:Class="Microsoft.DataStreamer.Samples.EarthquakeSimulator.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Microsoft.DataStreamer.Samples.EarthquakeSimulator"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="0">
+            <TextBlock FontSize="36" Text="Earthquake Simulator" Margin="20,20,20,80" HorizontalAlignment="Left" />
+
+            <StackPanel Orientation="Vertical" Margin="30,0,0,0" HorizontalAlignment="Left">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                    <Button x:Name="buttonStartSeismometer"      Content="Start Seismometer" Style="{StaticResource CommandButton}" Click="buttonStartSeismometer_Click"  IsEnabled="{Binding IsReady}" />
+                    <Button x:Name="buttonStopSeismometer"       Content="Stop Seismometer"  Style="{StaticResource CommandButton}" Click="buttonStopSeismometer_Click"  IsEnabled="{Binding IsStreaming}"  />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,50,0,0">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+                        <TextBlock Text="Enter Peak ground acceleration (in g's)" Style="{StaticResource Instruction}" />
+                    <TextBox x:Name="richterScale" Text="{Binding PGA, Mode=TwoWay}" Width="200" HorizontalAlignment="Left" Margin="0,0,0,10" />
+                </StackPanel>
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin="10,0,0,0">
+                    <TextBlock Text="Duration of Earthquake (sec)" Style="{StaticResource Instruction}" />
+                    <TextBox x:Name="duration" Text="{Binding Duration, Mode=TwoWay}" Width="200" HorizontalAlignment="Left" Margin="0,0,0,10" />
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                    <Button x:Name="buttonStartEarthquake"      Content="Start Earthquake" Style="{StaticResource CommandButton}" Click="ButtonStartEarthquake_Click" IsEnabled="{Binding IsStreaming}" />
+                    <Button x:Name="buttonStopEarthquake"       Content="Stop Earthquake"  Style="{StaticResource CommandButton}" Click="ButtonStopEarthquake_Click" IsEnabled="{Binding IsStreaming}"  />
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,20,0,0">
+                    <Button x:Name="buttonStartRecording" Content="Start Recording"  Style="{StaticResource CommandButton}" Click="ButtonStartRecording_Click" IsEnabled="{Binding IsStreaming}" />
+                    <Button x:Name="buttonStopRecording"  Content="Stop Recording"   Style="{StaticResource CommandButton}" Click="ButtonStopRecording_Click" IsEnabled="{Binding IsRecording}" />
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+        <Grid Grid.Row="0" Grid.Column="1" Background="#f0f0f0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"></RowDefinition>
+                <RowDefinition Height="60"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="60"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock FontSize="36" Text="Data Streamer" Margin="20" Grid.Row="0" Grid.Column="0" />
+            <StackPanel Orientation="Vertical" Margin="40, 0, 0, 0" Grid.Row="1" Grid.Column="0">
+                <StackPanel Margin="10,0,0,0" Orientation="Horizontal">
+                    <TextBlock Text="Status" Style="{StaticResource VersionLabel}" />
+                    <TextBlock Text="{Binding Status, Mode=TwoWay}" Style="{StaticResource VersionText}" />
+                </StackPanel>
+                <StackPanel Margin="10,0,0,0" Orientation="Horizontal">
+                    <TextBlock Text="App Version" Style="{StaticResource VersionLabel}" />
+                    <TextBlock Text="{Binding AppVersion, Mode=TwoWay}" Style="{StaticResource VersionText}" />
+                </StackPanel>
+                <StackPanel Margin="10,0,0,0" Orientation="Horizontal">
+                    <TextBlock Text="API Version" Style="{StaticResource VersionLabel}" />
+                    <TextBlock Text="{Binding ApiVersion, Mode=TwoWay}" Style="{StaticResource VersionText}" />
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="0" Background="Black" Margin="30,10,30,20">
+                <RichTextBlock Name="OutputPane" Style="{StaticResource OutputLines}" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    <Paragraph>
+                        <Run Text="{Binding OutputLines, Mode=TwoWay}" />
+                    </Paragraph>
+                </RichTextBlock>
+            </StackPanel>
+            <StackPanel Margin="30,0,0,20" Orientation="Horizontal" Grid.Row="3" Grid.Column="0">
+                <Button x:Name="buttonClearOutput"    Content="Clear Output"        Style="{StaticResource CommandButton}" Click="ButtonClearOutput_Click" />
+                <Button x:Name="buttonReset"          Content="Reset Data Streamer" Style="{StaticResource CommandButton}" Click="ButtonReset_Click"  IsEnabled="{Binding IsReady}" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+
+</Page>

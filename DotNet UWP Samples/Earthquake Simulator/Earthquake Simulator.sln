@@ -1,0 +1,77 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29409.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Earthquake Simulator", "Earthquake Simulator\Earthquake Simulator.csproj", "{77A8F3EB-2C9B-4A82-9F52-55BF4B10DF12}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataStreamerUWP", "..\..\DataStreamerUWP\DataStreamerUWP.csproj", "{2BE69E28-ED04-4BF9-BF28-934786CE446D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|ARM = Debug|ARM
+		Debug|ARM64 = Debug|ARM64
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|ARM = Release|ARM
+		Release|ARM64 = Release|ARM64
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{77A8F3EB-2C9B-4A82-9F52-55BF4B10DF12}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{77A8F3EB-2C9B-4A82-9F52-55BF4B10DF12}.Debug|ARM.ActiveCfg = Debug|ARM
+		{77A8F3EB-2C9B-4A82-9F52-55BF4B10DF12}.Debug|ARM.Build.0 = Debug|ARM
+		{77A8F3EB-2C9B-4A82-9F52-55BF4B10DF12}.Debug|ARM.Deploy.0 = Debug|ARM
+		{77A8F3EB-2C9B-4A82-9F52-55BF4B10DF12}.Debug|ARM64.ActiveCfg = Debug|ARM64
+		{77A8F3EB-2C9B-4A82-9F52-55BF4B10DF12}.Debug|ARM64.Build.0 = Debug|ARM64
+		{77A8F3EB-2C9B-4A82-9F52-55BF4B10DF12}.Debug|ARM64.Deploy.0 = Debug|ARM64
+		{77A8F3EB-2C9B-4A82-9F52-55BF4B10DF12}.Debug|x64.ActiveCfg = Debug|x64
+		{77A8F3EB-2C9B-4A82-9F52-55BF4B10DF12}.Debug|x64.Build.0 = Debug|x64
+		{77A8F3EB-2C9B-4A82-9F52-55BF4B10DF12}.Debug|x64.Deploy.0 = Debug|x64
+		{77A8F3EB-2C9B-4A82-9F52-55BF4B10DF12}.Debug|x86.ActiveCfg = Debug|x86
+		{77A8F3EB-2C9B-4A82-9F52-55BF4B10DF12}.Debug|x86.Build.0 = Debug|x86
+		{77A8F3EB-2C9B-4A82-9F52-55BF4B10DF12}.Debug|x86.Deploy.0 = Debug|x86
+		{77A8F3EB-2C9B-4A82-9F52-55BF4B10DF12}.Release|Any CPU.ActiveCfg = Release|x86
+		{77A8F3EB-2C9B-4A82-9F52-55BF4B10DF12}.Release|ARM.ActiveCfg = Release|ARM
+		{77A8F3EB-2C9B-4A82-9F52-55BF4B10DF12}.Release|ARM.Build.0 = Release|ARM
+		{77A8F3EB-2C9B-4A82-9F52-55BF4B10DF12}.Release|ARM.Deploy.0 = Release|ARM
+		{77A8F3EB-2C9B-4A82-9F52-55BF4B10DF12}.Release|ARM64.ActiveCfg = Release|ARM64
+		{77A8F3EB-2C9B-4A82-9F52-55BF4B10DF12}.Release|ARM64.Build.0 = Release|ARM64
+		{77A8F3EB-2C9B-4A82-9F52-55BF4B10DF12}.Release|ARM64.Deploy.0 = Release|ARM64
+		{77A8F3EB-2C9B-4A82-9F52-55BF4B10DF12}.Release|x64.ActiveCfg = Release|x64
+		{77A8F3EB-2C9B-4A82-9F52-55BF4B10DF12}.Release|x64.Build.0 = Release|x64
+		{77A8F3EB-2C9B-4A82-9F52-55BF4B10DF12}.Release|x64.Deploy.0 = Release|x64
+		{77A8F3EB-2C9B-4A82-9F52-55BF4B10DF12}.Release|x86.ActiveCfg = Release|x86
+		{77A8F3EB-2C9B-4A82-9F52-55BF4B10DF12}.Release|x86.Build.0 = Release|x86
+		{77A8F3EB-2C9B-4A82-9F52-55BF4B10DF12}.Release|x86.Deploy.0 = Release|x86
+		{2BE69E28-ED04-4BF9-BF28-934786CE446D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BE69E28-ED04-4BF9-BF28-934786CE446D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BE69E28-ED04-4BF9-BF28-934786CE446D}.Debug|ARM.ActiveCfg = Debug|ARM
+		{2BE69E28-ED04-4BF9-BF28-934786CE446D}.Debug|ARM.Build.0 = Debug|ARM
+		{2BE69E28-ED04-4BF9-BF28-934786CE446D}.Debug|ARM64.ActiveCfg = Debug|ARM64
+		{2BE69E28-ED04-4BF9-BF28-934786CE446D}.Debug|ARM64.Build.0 = Debug|ARM64
+		{2BE69E28-ED04-4BF9-BF28-934786CE446D}.Debug|x64.ActiveCfg = Debug|x64
+		{2BE69E28-ED04-4BF9-BF28-934786CE446D}.Debug|x64.Build.0 = Debug|x64
+		{2BE69E28-ED04-4BF9-BF28-934786CE446D}.Debug|x86.ActiveCfg = Debug|x86
+		{2BE69E28-ED04-4BF9-BF28-934786CE446D}.Debug|x86.Build.0 = Debug|x86
+		{2BE69E28-ED04-4BF9-BF28-934786CE446D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BE69E28-ED04-4BF9-BF28-934786CE446D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BE69E28-ED04-4BF9-BF28-934786CE446D}.Release|ARM.ActiveCfg = Release|ARM
+		{2BE69E28-ED04-4BF9-BF28-934786CE446D}.Release|ARM.Build.0 = Release|ARM
+		{2BE69E28-ED04-4BF9-BF28-934786CE446D}.Release|ARM64.ActiveCfg = Release|ARM64
+		{2BE69E28-ED04-4BF9-BF28-934786CE446D}.Release|ARM64.Build.0 = Release|ARM64
+		{2BE69E28-ED04-4BF9-BF28-934786CE446D}.Release|x64.ActiveCfg = Release|x64
+		{2BE69E28-ED04-4BF9-BF28-934786CE446D}.Release|x64.Build.0 = Release|x64
+		{2BE69E28-ED04-4BF9-BF28-934786CE446D}.Release|x86.ActiveCfg = Release|x86
+		{2BE69E28-ED04-4BF9-BF28-934786CE446D}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {06FD2D6C-D8DD-4575-B951-CE22F5720BB0}
+	EndGlobalSection
+EndGlobal
