@@ -16,21 +16,45 @@ using System.Threading.Tasks;
 
 using Microsoft.DataStreamer.UWP;
 using System.Globalization;
+using Windows.Media.ClosedCaptioning;
 
 namespace Microsoft.DataStreamer.Samples.SensorSimulator
 {
     public class SensorRepository : IStreamingRepository
     {
-        private DateTime        _start        = DateTime.MinValue;
-        private readonly object _lock         = new object();
-        private const double    MaxSampleData = 1.94d;
-
         public SensorRepository()
         {
-            this.NumChannels = _manifest.Channels.GetLeaves<Channel>("SubChannels").Count();
         }
         
-        public int NumChannels { get; set; }
+        public SensorChannel AngularSensors  => this.Manifest.Channels[0] as SensorChannel;
+        public SensorChannel Accelerometer   => this.Manifest.Channels[0].SubChannels[0] as SensorChannel;
+        public SensorChannel Gyrometer       => this.Manifest.Channels[0].SubChannels[1] as SensorChannel;
+        public SensorChannel Inclinometer    => this.Manifest.Channels[0].SubChannels[2] as SensorChannel;
+        public SensorChannel Environmental   => this.Manifest.Channels[1] as SensorChannel;
+        public SensorChannel Illuminance     => this.Manifest.Channels[1].SubChannels[0] as SensorChannel;
+        public SensorChannel Altimeter       => this.Manifest.Channels[1].SubChannels[1] as SensorChannel;
+        public SensorChannel Barometer       => this.Manifest.Channels[1].SubChannels[2] as SensorChannel;
+        public SensorChannel Compass         => this.Manifest.Channels[2] as SensorChannel;
+        public SensorChannel MagneticNorth   => this.Manifest.Channels[2].SubChannels[0] as SensorChannel;
+        public SensorChannel TrueNorth       => this.Manifest.Channels[2].SubChannels[1] as SensorChannel;
+
+        public void UpdatePending()
+        {
+            UpdatePending(this.Manifest.Channels);
+        }
+
+        private static void UpdatePending(IList<Channel> channels)
+        {
+            if(channels != null)
+            { 
+                foreach(SensorChannel channel in channels)
+                { 
+                    channel.Active = channel.PendingActive;
+
+                    UpdatePending(channel.SubChannels);
+                }
+            }
+        }
 
         #region IStreamingRepository
 
@@ -38,95 +62,112 @@ namespace Microsoft.DataStreamer.Samples.SensorSimulator
 
         public async Task<string> GetData()
         {
-            var list        = new List<string>();
-            var numChannels = Math.Min(Math.Max(1, this.NumChannels), 99);
+            var list = new List<string>();
 
-            for(int i = 0; i < numChannels; ++i)
-                list.Add(Math.Floor(_random.Next() / 1000000d).ToString());
+            foreach(SensorChannel channel in this.Manifest.Channels)
+                GetChannelData(channel, list);
 
             return await Task.FromResult(string.Join(",", list));
         }
 
-        public DataSourceManifest Manifest => _manifest;
+        private void GetChannelData(SensorChannel channel, List<string> target)
+        {
+            if(channel.Active)
+            {
+                if((channel.SubChannels?.Count ?? 0) > 0)
+                {
+                    foreach(SensorChannel subChannel in channel.SubChannels)
+                        GetChannelData(subChannel, target);
+                }
+                else
+                    target.Add(channel.GetData());
+            }
+        }
 
         #endregion
 
         #region Manifest
 
-        private readonly DataSourceManifest _manifest = new DataSourceManifest
+        public DataSourceManifest Manifest { get; private set; } = new DataSourceManifest
         {
             Id           = "806A1E8C-0F7C-4964-B5AF-1A518867CA4E",
             Name         = "Sensor Simulator",
             DataInterval = 40,
             Channels     = new List<Channel>
             {
-                new Channel 
+                new SensorChannel 
                 {
                     Name          = "Angular Sensors",
                     Description   = "Sensors with components in 3 planes (e.g. X, Y, Z) measured in degrees",
                     SubChannels   = new List<Channel>
                     {
-                        new Channel 
+                        new SensorChannel 
                         {
                             Name          = "Accelerometer",
                             Description   = "G-force acceleration",
                             UnitOfMeasure = "g's",
                             SubChannels   = new List<Channel>
                             {
-                                new Channel 
+                                new SensorChannel 
                                 {
                                     Name          = "X",
                                     Id            = "ACC_X",
                                     Description   = "G-force acceleration along the x-axis",
-                                    UnitOfMeasure = "g's"
+                                    UnitOfMeasure = "g's",
+                                    Index         = 1
                                 },
-                                new Channel 
+                                new SensorChannel 
                                 {
                                     Name          = "Y",
                                     Id            = "ACC_Y",
                                     Description   = "G-force acceleration along the y-axis",
-                                    UnitOfMeasure = "g's"
+                                    UnitOfMeasure = "g's",
+                                    Index         = 2
                                 },
-                                new Channel 
+                                new SensorChannel 
                                 {
                                     Name          = "Z",
                                     Id            = "ACC_Z",
                                     Description   = "G-force acceleration along the z-axis",
-                                    UnitOfMeasure = "g's"
+                                    UnitOfMeasure = "g's",
+                                    Index         = 3
                                 }
                             }
                         },
-                        new Channel 
+                        new SensorChannel 
                         {
                             Name          = "Gyrometer",
                             Description   = "Angular velocity, in degrees per second",
                             UnitOfMeasure = "°/sec",
                             SubChannels   = new List<Channel>
                             {
-                                new Channel 
+                                new SensorChannel 
                                 {
                                     Name          = "X",
                                     Id            = "GYRO_X",
                                     Description   = "Angular velocity, in degrees per second, about the x-axis",
-                                    UnitOfMeasure = "°/sec"
+                                    UnitOfMeasure = "°/sec",
+                                    Index         = 4
                                 },
-                                new Channel 
+                                new SensorChannel 
                                 {
                                     Name          = "Y",
                                     Id            = "GYRO_Y",
                                     Description   = "Angular velocity, in degrees per second, about the y-axis",
-                                    UnitOfMeasure = "°/sec"
+                                    UnitOfMeasure = "°/sec",
+                                    Index         = 5
                                 },
-                                new Channel 
+                                new SensorChannel 
                                 {
                                     Name          = "Z",
                                     Id            = "GYRO_Z",
                                     Description   = "Angular velocity, in degrees per second, about the z-axis",
-                                    UnitOfMeasure = "°/sec"
+                                    UnitOfMeasure = "°/sec",
+                                    Index         = 6
                                 }
                             }
                         },
-                        new Channel 
+                        new SensorChannel 
                         {
                             Name          = "Inclinometer",
                             Id            = "PITCH",
@@ -134,81 +175,89 @@ namespace Microsoft.DataStreamer.Samples.SensorSimulator
                             UnitOfMeasure = "°",
                             SubChannels   = new List<Channel>
                             {
-                                new Channel 
+                                new SensorChannel 
                                 {
                                     Name          = "Pitch",
                                     Id            = "PITCH",
                                     Description   = "Rotation in degrees around the x-axis",
-                                    UnitOfMeasure = "°"
+                                    UnitOfMeasure = "°",
+                                    Index         = 7
                                 },
-                                new Channel 
+                                new SensorChannel 
                                 {
                                     Name          = "Roll",
                                     Id            = "ROLL",
                                     Description   = "Rotation in degrees around the y-axis",
-                                    UnitOfMeasure = "°"
+                                    UnitOfMeasure = "°",
+                                    Index         = 8
                                 },
-                                new Channel 
+                                new SensorChannel 
                                 {
                                     Name          = "Yaw",
                                     Id            = "YAW",
                                     Description   = "Rotation in degrees around the z-axis",
-                                    UnitOfMeasure = "°"
+                                    UnitOfMeasure = "°",
+                                    Index         = 9
                                 }
                             }
                         }
                     }
                 },
-                new Channel 
+                new SensorChannel 
                 {
                     Name          = "Environmental Sensors",
                     Description   = "Sensors that measure the environment",
                     SubChannels   = new List<Channel>
                     {
-                        new Channel 
+                        new SensorChannel 
                         {
                             Name          = "Illuminance",
                             Id            = "ILLUM",
                             Description   = "Illuminance in Lux",
-                            UnitOfMeasure = "lux"
+                            UnitOfMeasure = "lux",
+                            Index         = 10
                         },
                                                                        
-                        new Channel 
+                        new SensorChannel 
                         {
                             Name          = "Altimeter",
                             Id            = "ALT",
                             Description   = "Current altitude determined by the altimeter sensor in meters",
-                            UnitOfMeasure = "m"
+                            UnitOfMeasure = "m",
+                            Index         = 11
                         },
-                        new Channel 
+                        new SensorChannel 
                         {
                             Name          = "Barometer",
                             Id            = "BAR",
                             Description   = "Barometric pressure in Hectopascals",
-                            UnitOfMeasure = "hPA"
+                            UnitOfMeasure = "hPA",
+                            Index         = 12
                         }
                     }
                 },
-                new Channel 
+                new SensorChannel 
                 {
                     Name          = "Compass",
                     Description   = "Compass heading in degrees",
                     UnitOfMeasure = "°",
                     SubChannels   = new List<Channel>
                     {
-                        new Channel
+                        new SensorChannel
                         {
                             Name          = "Magnetic North",
                             Id            = "COMPASS_MN",
                             Description   = "Heading in degrees relative to magnetic-north",
-                            UnitOfMeasure = "°"
+                            UnitOfMeasure = "°",
+                            Index         = 13
                         },
-                        new Channel 
+                        new SensorChannel 
                         {
                             Name          = "True North",
                             Id            = "COMPASS_TN",
                             Description   = "Heading in degrees relative to geographic true-north",
-                            UnitOfMeasure = "°"
+                            UnitOfMeasure = "°",
+                            Index         = 14
                         }
                     }
                 }
@@ -217,19 +266,33 @@ namespace Microsoft.DataStreamer.Samples.SensorSimulator
             {                                
                 new DataSourceManifest.Command
                 {
-                    Name        = "BlastOff",
-                    Description = "Instruct the space shuttle to take off",
+                    Name        = "Measurement System",
+                    Description = "Choose unit of measure system for certain sensors",
                     Params      = new List<DataSourceManifest.Command.Param>
                     {
                         new DataSourceManifest.Command.Param
                         {
-                            Name        = "Altitude",
-                            Description = "The highest altitude to attain",
-                            Type        = "integer"
+                            Name        = "Measurement System",
+                            Description = "Choose Metric or British/US",
+                            Type        = "string",
+                            LookupList  = new List<DataSourceManifest.Command.LookupValue>
+                            {
+                                new DataSourceManifest.Command.LookupValue
+                                {
+                                    Caption = "British/US",
+                                    Value   = "Standard"
+                                },
+                                new DataSourceManifest.Command.LookupValue
+                                {
+                                    Caption = "Metric",
+                                    Value   = "Metric"
+                                }
+                            }
                         }
                     }
-                },
-                new DataSourceManifest.Command
+                }
+                #if false
+                ,new DataSourceManifest.Command
                 {
                     Name        = "Land",
                     Description = "Instruct the space shuttle to land",
@@ -262,8 +325,61 @@ namespace Microsoft.DataStreamer.Samples.SensorSimulator
                     Name        = "StartCountdown",
                     Description = "Start the countdown"
                 }
+                #endif
             }               
         };
+        
+        public DataSourceManifest ActiveManifest
+        {
+            get
+            { 
+                // First do a shallow clone
+                var manifest = this.Manifest.ShallowClone();
+
+                manifest.Channels = DeepCloneChannels(manifest.Channels);
+
+                return manifest;
+            }
+        }
+
+        private IList<Channel> DeepCloneChannels(IList<Channel> channels)
+        {
+            if(channels == null)
+                return null;
+
+            var list = new List<Channel>();
+
+            foreach(SensorChannel channel in channels)
+            {
+                if(channel.Active)
+                {
+                    Channel newChannel = channel;
+
+                    if((channel.SubChannels?.Count ?? 0) > 0)
+                    { 
+                        var subChannels = DeepCloneChannels(channel.SubChannels);
+
+                        // Don't include this channel if no subchannels were active
+                        if((subChannels?.Count ?? 0) == 0)
+                            continue;
+
+                        // Depp clone the channel
+                        newChannel = new Channel
+                        {
+                            Id             = channel.Id,
+                            Name           = channel.Name,
+                            Description    = channel.Description,
+                            UnitOfMeasure  = channel.UnitOfMeasure,
+                            SubChannels    = subChannels,
+                        };                        
+                    }
+
+                    list.Add(newChannel);
+                }
+            }
+
+            return list.Count > 0 ? list : null;
+        }
 
         #endregion
     }

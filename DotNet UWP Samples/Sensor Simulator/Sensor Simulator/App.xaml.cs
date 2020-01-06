@@ -42,7 +42,9 @@ namespace Microsoft.DataStreamer.Samples.SensorSimulator
             this.Suspending += OnSuspending;
             _instance = this;
 
-            _service = new SensorService(new SensorRepository(), new SensorViewModel());
+            var repo = new SensorRepository();
+
+            _service = new SensorService(repo, new SensorViewModel(repo));
 
             _dataStreamerAppService = new DataStreamerAppService(_service);
         }

@@ -34,19 +34,19 @@ namespace Microsoft.DataStreamer.Samples.SensorSimulator
         public SensorViewModel ViewModel  => _viewModel;
         public CoreDispatcher  Dispatcher { set { _viewModel.Dispatcher = value; }}
 
-        public async Task ClearOutput()
+        public void ClearOutput()
         {
-            await _viewModel.ClearOutput();
+            _viewModel.ClearOutput();
         }
 
         public async override Task<string> Connect(IDictionary<string, object> message)
         {
             var result = await base.Connect(message);
 
-            await _viewModel.ClearOutput();
-            await _viewModel.SetStatus("NotReady");
-            await _viewModel.SetApiVersion(message.ValueOrDefault("Version", "0.0").ToString());
-            await _viewModel.SetAppVersion(message.ValueOrDefault("AppVersion", "0.0").ToString());
+            _viewModel.ClearOutput();
+            _viewModel.SetStatus("NotReady");
+            _viewModel.SetApiVersion(message.ValueOrDefault("Version", "0.0").ToString());
+            _viewModel.SetAppVersion(message.ValueOrDefault("AppVersion", "0.0").ToString());
 
             return result;
         }
@@ -61,12 +61,31 @@ namespace Microsoft.DataStreamer.Samples.SensorSimulator
                 { 
                     var status = message["Status"]?.ToString() ?? "";
 
-                    await _viewModel.SetStatus(status);
+                    _viewModel.SetStatus(status);
                     await _viewModel.AppendOutputLine("Status: " + status);
                 }
             }
             else
                 await _viewModel.AppendOutputLine(" Event: " + eventName);
+        }
+
+        public override Task OnCommand(string command, dynamic parms)
+        {
+            if(command == "Measurement System")
+            {
+                try
+                { 
+                    var val = parms.MeasurementSystem;
+
+                    this.ViewModel.IsMetric = val.ToString() == "Metric";
+                }
+                catch
+                {
+
+                }
+            }
+
+            return Task.CompletedTask;
         }
 
         public async override Task Disconnect()
@@ -83,10 +102,17 @@ namespace Microsoft.DataStreamer.Samples.SensorSimulator
             { 
                 this.Connection = null;
 
-                await _viewModel.SetStatus("Not Connected");
-                await _viewModel.SetAppVersion("");
-                await _viewModel.SetApiVersion("");
+                _viewModel.SetStatus("Not Connected");
+                _viewModel.SetAppVersion("");
+                _viewModel.SetApiVersion("");
             }
+        }
+
+        public override async Task UpdateManifest(Func<string, Task> fnOnError = null)
+        {
+            _repo.UpdatePending();
+
+            await SendRPCCommand("SetManifest", new { Manifest = _repo.ActiveManifest }, fnOnError);
         }
     }
 

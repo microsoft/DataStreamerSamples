@@ -86,6 +86,18 @@ namespace Microsoft.DataStreamer.Samples.SensorSimulator
             } 
         }
 
+        private async void ButtonUpdateManifest_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            { 
+                await App.Service.UpdateManifest(DispatchShowError);
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine($"Exception while attempting to update manifest: {ex.Message}");
+            } 
+        }
+
         private async void ButtonReset_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -98,11 +110,11 @@ namespace Microsoft.DataStreamer.Samples.SensorSimulator
             }
         }
 
-        private async void ButtonClearOutput_Click(object sender, RoutedEventArgs e)
+        private void ButtonClearOutput_Click(object sender, RoutedEventArgs e)
         {
             try
             { 
-                await App.Service.ClearOutput();
+                App.Service.ClearOutput();
             }
             catch(Exception ex)
             {

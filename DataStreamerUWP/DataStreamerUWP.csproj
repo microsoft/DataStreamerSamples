@@ -131,6 +131,7 @@
     <Compile Include="Repository\IStreamingRepository.cs" />
     <Compile Include="Service\AppServiceStreamingService.cs" />
     <Compile Include="Service\DataStreamerAppService.cs" />
+    <Compile Include="Service\ICommandService.cs" />
     <Compile Include="Service\IStreamingService.cs" />
     <Compile Include="Service\StreamingService.cs" />
     <Compile Include="DataStreamerViewModel.cs" />

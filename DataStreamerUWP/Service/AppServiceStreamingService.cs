@@ -40,11 +40,6 @@ namespace Microsoft.DataStreamer.UWP
 
         public AppServiceConnection Connection { get; set; }
 
-        public override Task UpdateManifest()
-        {
-            throw new NotImplementedException();
-        }
-
         protected override async Task SendData(string data)
         {
             try
@@ -106,7 +101,7 @@ namespace Microsoft.DataStreamer.UWP
             await SendRPCCommand("SetStatus", new {status = "appnotready"} );
         }
 
-        private async Task SendRPCCommand(string command, object oParams = null, Func<string, Task> fnOnError = null)
+        protected async Task SendRPCCommand(string command, object oParams = null, Func<string, Task> fnOnError = null)
         {
             var cmd = new Command
             {
@@ -117,17 +112,19 @@ namespace Microsoft.DataStreamer.UWP
             if(oParams != null)
                 cmd.Params = JObject.FromObject(oParams);
 
+            var json = JsonConvert.SerializeObject(cmd);
+
             // Create a message to send to Data Streamer
             var message = new ValueSet
             {
                 { "Command", command },
                     
                 // JSON RPC 2.0 payload
-                { "Data", JsonConvert.SerializeObject(cmd) }
+                { "Data", json }
             };
 
             // Run asynchronously
-            _ = Task.Run( async()=>
+            Task.Run( async()=>
             {
                 try
                 { 
@@ -136,8 +133,8 @@ namespace Microsoft.DataStreamer.UWP
 
                     if(dParams != null && result.Message.ContainsKey("Data"))
                     {
-                        var json      = result.Message["Data"].ToString();
-                        var cmdResult = JsonConvert.DeserializeObject<CommandResult>(json);
+                        var jsonResult = result.Message["Data"].ToString();
+                        var cmdResult  = JsonConvert.DeserializeObject<CommandResult>(jsonResult);
 
                         if(cmdResult.Error != null)
                         { 
@@ -152,7 +149,8 @@ namespace Microsoft.DataStreamer.UWP
                 {
                     Debug.WriteLine(ex.Message);
                 }
-            });
+
+            }).FireAndForget();
 
             await Task.CompletedTask;
         }

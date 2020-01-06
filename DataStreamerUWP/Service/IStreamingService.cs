@@ -32,7 +32,8 @@ namespace Microsoft.DataStreamer.UWP
         Task         Reset();
         Task         Ready();
         Task         NotReady();
-        Task         UpdateManifest();
+        Task         UpdateManifest(Func<string, Task> fnOnError = null);
         Task         OnEvent(IDictionary<string, object> message);
+        Task         OnCommand(string command, dynamic parms);
     }
 }

@@ -45,6 +45,23 @@
             <Setter Property="Margin"               Value="20" />
             <Setter Property="Height"               Value="200" />
         </Style>
+        <Style TargetType="CheckBox" x:Key="Level1">
+            <Setter Property="Width"                Value="400" />
+            <Setter Property="Padding"              Value="8 4 4 4" />
+            <Setter Property="FontSize"             Value="20" />
+        </Style>
+        <Style TargetType="CheckBox" x:Key="Level2">
+            <Setter Property="Width"                Value="400" />
+            <Setter Property="Padding"              Value="8 4 4 4" />
+            <Setter Property="Margin"               Value="20 4 4 4" />
+            <Setter Property="FontSize"             Value="13" />
+        </Style>
+        <Style TargetType="CheckBox" x:Key="Level3">
+            <Setter Property="Width"                Value="400" />
+            <Setter Property="Padding"              Value="8 4 4 4" />
+            <Setter Property="Margin"               Value="60 4 4 4" />
+            <Setter Property="FontSize"             Value="13" />
+        </Style>
     </Application.Resources>
 
 </Application>

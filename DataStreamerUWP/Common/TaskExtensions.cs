@@ -44,5 +44,14 @@ namespace Microsoft.DataStreamer.UWP
 
             await task.WithTimeout(new TimeSpan(0, 0, 0, seconds, milliseconds));
         }
+ 
+        /// <summary>
+        /// Fire and forget a task
+        /// </summary>
+        /// <param name="timeout">Timeout in milliseconds</param>
+        public static void FireAndForget(this Task task)
+        {
+            _ = task.ConfigureAwait(false);
+        }
     }
 }

@@ -11,9 +11,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Microsoft.DataStreamer.UWP
 {
@@ -35,17 +35,24 @@ namespace Microsoft.DataStreamer.UWP
         /// <summary>
         public class Command
         {
-            public string         Name              { get; set;}
-            public string         Description       { get; set;}
-            public IList<Param>   Params            { get; set;} = new List<Param>(); 
+            public string       Name                 { get; set;}
+            public string       Description          { get; set;}
+            public IList<Param> Params               { get; set;} = new List<Param>(); 
+                                                     
+            public class Param                       
+            {                                        
+                public string   Name                 { get; set;}
+                public string   Type                 { get; set;}
+                public string   Description          { get; set;}
+                public string   Value                { get; set;}
+                public Range    Range                { get; set; }
+                public IList<LookupValue> LookupList { get; set; } = new List<LookupValue>();
+            }
         
-            public class Param
+            public class LookupValue
             {
-                public string     Name              { get; set;}
-                public string     Type              { get; set;}
-                public string     Description       { get; set;}
-                public string     Value             { get; set;}
-                public Range      Range             { get; set; }
+                public string Value                  { get; set;}
+                public string Caption                { get; set; }
             }
         
             public class Range

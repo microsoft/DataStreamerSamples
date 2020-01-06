@@ -40,25 +40,25 @@ namespace Microsoft.DataStreamer.UWP
         public bool   IsStreaming  => _status == "Reading";
         public bool   IsRecording  => _status == "Recording";
 
-        public async Task SetApiVersion(string val)
+        public void SetApiVersion(string val)
         { 
             _apiVersion = val;
-            await OnPropertyChanged("ApiVersion"); 
+            OnPropertyChanged("ApiVersion"); 
         }            
             
-        public async Task SetAppVersion(string val)
+        public void SetAppVersion(string val)
         { 
             _appVersion = val;
-            await OnPropertyChanged("AppVersion"); 
+            OnPropertyChanged("AppVersion"); 
         } 
                     
-        public async Task SetStatus(string val)
+        public void SetStatus(string val)
         { 
             _status = val;
-            await OnPropertyChanged("Status"); 
-            await OnPropertyChanged("IsReady"); 
-            await OnPropertyChanged("IsStreaming"); 
-            await OnPropertyChanged("IsRecording"); 
+            OnPropertyChanged("Status"); 
+            OnPropertyChanged("IsReady"); 
+            OnPropertyChanged("IsStreaming"); 
+            OnPropertyChanged("IsRecording"); 
         } 
         
         public CoreDispatcher Dispatcher { get; set; }
@@ -69,16 +69,16 @@ namespace Microsoft.DataStreamer.UWP
 
         #endregion 
 
-        protected async Task OnPropertyChanged(string name)
+        protected void OnPropertyChanged(string name)
         { 
             var dispatcher = this.Dispatcher;
 
             if(dispatcher != null)
             { 
-                await dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                 {
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name)); 
-                });
+                }).AsTask().FireAndForget();
             }
         } 
     }

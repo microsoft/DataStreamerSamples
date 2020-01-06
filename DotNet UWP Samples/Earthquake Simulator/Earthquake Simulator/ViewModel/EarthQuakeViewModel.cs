@@ -37,14 +37,14 @@ namespace Microsoft.DataStreamer.Samples.EarthquakeSimulator
             { 
                _outputLines.Clear();
 
-                await OnPropertyChanged("OutputLines"); 
+                OnPropertyChanged("OutputLines"); 
             }            
             
             public async Task AppendLine(string line)
             { 
                _outputLines.AppendLine(line);
 
-                await OnPropertyChanged("OutputLines"); 
+                OnPropertyChanged("OutputLines"); 
             }            
             
             public async Task AppendOutputLine(string val)

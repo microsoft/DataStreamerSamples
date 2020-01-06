@@ -60,7 +60,7 @@ namespace Microsoft.DataStreamer.UWP
         {
             _cancellationToken = new CancellationTokenSource();
 
-            _ = Task.Run( async ()=>
+            Task.Run( async ()=>
             {
                 while(!_cancellationToken.Token.IsCancellationRequested)
                 {
@@ -71,7 +71,8 @@ namespace Microsoft.DataStreamer.UWP
 
                 _cancellationToken?.Dispose();
                 _cancellationToken = null;
-            });
+
+            }).FireAndForget();
 
             await Task.CompletedTask;
         }
@@ -89,7 +90,8 @@ namespace Microsoft.DataStreamer.UWP
         public abstract Task Reset();
         public abstract Task Ready();
         public abstract Task NotReady();
-        public abstract Task UpdateManifest();
+        public abstract Task UpdateManifest(Func<string, Task> fnOnError = null);
         public abstract Task OnEvent(IDictionary<string, object> message);
+        public abstract Task OnCommand(string command, dynamic parms);
     }
 }
