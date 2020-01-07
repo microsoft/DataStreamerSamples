@@ -9,6 +9,7 @@
 //
 //*********************************************************
 
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -76,16 +77,22 @@ namespace Microsoft.DataStreamer.UWP
 
                         // Handle events/notifications from Data Streamer  
                         case "Event":
-                            await _service.OnEvent(message);
+                            // Run asynchronously
+                            _service.OnEvent(message).FireAndForget();
                             break;
 
                         case "Close":                       
-                            await _service.Disconnect();
+                            // Run asynchronously
+                            _service.Disconnect().FireAndForget();
                             break;
 
                         default:
                         {
-                            returnData.Add("Status", "Fail: unknown command");
+                            var jsonParams = message.ValueOrDefault("Params", "").ToString();
+                            var parms = jsonParams == null ? null : JObject.Parse(jsonParams);
+
+                            await _service.OnCommand(command, parms);
+
                             await args.Request.SendResponseAsync(returnData);
                             break;
                         }

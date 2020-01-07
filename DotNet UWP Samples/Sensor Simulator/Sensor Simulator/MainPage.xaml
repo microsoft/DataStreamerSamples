@@ -1,0 +1,103 @@
+﻿<Page
+    x:Class="Microsoft.DataStreamer.Samples.SensorSimulator.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Microsoft.DataStreamer.Samples.SensorSimulator"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="0">
+            <TextBlock FontSize="36" Text="Sensor Simulator" Margin="20,20,20,30" HorizontalAlignment="Left" />
+
+            <Grid Margin="30,0,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Row="0" Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"></RowDefinition>
+                            <RowDefinition Height="32"></RowDefinition>
+                            <RowDefinition Height="32"></RowDefinition>
+                            <RowDefinition Height="32"></RowDefinition>
+                        <RowDefinition Height="50"></RowDefinition>
+                            <RowDefinition Height="32"></RowDefinition>
+                            <RowDefinition Height="32"></RowDefinition>
+                            <RowDefinition Height="32"></RowDefinition>
+                        <RowDefinition Height="50"></RowDefinition>
+                            <RowDefinition Height="32"></RowDefinition>
+                            <RowDefinition Height="32"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <CheckBox   Grid.Row="0"  Grid.Column="0" Style="{StaticResource Level1}" IsChecked="{Binding AngularSensors, Mode=TwoWay}">Angular Sensors</CheckBox>
+                     <CheckBox  Grid.Row="1"  Grid.Column="0" Style="{StaticResource Level2}" IsChecked="{Binding Accelerometer,  Mode=TwoWay}"  IsEnabled="{Binding AngularSensors}">Accelerometer</CheckBox>
+                     <CheckBox  Grid.Row="2"  Grid.Column="0" Style="{StaticResource Level2}" IsChecked="{Binding Gyrometer,      Mode=TwoWay}"  IsEnabled="{Binding AngularSensors}">Gyrometer</CheckBox>
+                     <CheckBox  Grid.Row="3"  Grid.Column="0" Style="{StaticResource Level2}" IsChecked="{Binding Inclinometer,   Mode=TwoWay }" IsEnabled="{Binding AngularSensors}">Inclinometer</CheckBox>
+                    <CheckBox   Grid.Row="4"  Grid.Column="0" Style="{StaticResource Level1}" IsChecked="{Binding Environmental,  Mode=TwoWay}">Environmental Sensors</CheckBox>
+                     <CheckBox  Grid.Row="5"  Grid.Column="0" Style="{StaticResource Level2}" IsChecked="{Binding Illuminance,    Mode=TwoWay}"  IsEnabled="{Binding Environmental}">Illuminance</CheckBox>
+                     <CheckBox  Grid.Row="6"  Grid.Column="0" Style="{StaticResource Level2}" IsChecked="{Binding Altimeter,      Mode=TwoWay}"  IsEnabled="{Binding Environmental}">Altimeter</CheckBox>
+                     <CheckBox  Grid.Row="7"  Grid.Column="0" Style="{StaticResource Level2}" IsChecked="{Binding Barometer,      Mode=TwoWay}"  IsEnabled="{Binding Environmental}">Barometer</CheckBox>
+                    <CheckBox   Grid.Row="8"  Grid.Column="0" Style="{StaticResource Level1}" IsChecked="{Binding Compass,        Mode=TwoWay}">Compass</CheckBox>
+                     <CheckBox  Grid.Row="9"  Grid.Column="0" Style="{StaticResource Level2}" IsChecked="{Binding MagneticNorth,  Mode=TwoWay}"  IsEnabled="{Binding Compass}">Magnetic North</CheckBox>
+                     <CheckBox  Grid.Row="10" Grid.Column="0" Style="{StaticResource Level2}" IsChecked="{Binding TrueNorth,      Mode=TwoWay}"  IsEnabled="{Binding Compass}">True North</CheckBox>
+                    <TextBlock  Grid.Row="11"  Text="Measurement System" Margin="20 40 0 10" FontSize="18"></TextBlock>
+                    <RadioButton  Grid.Row="12" Grid.Column="0" Margin="40 00 0 0" GroupName="MeasurementSystem" IsChecked="{Binding IsStandard}">British/US</RadioButton>
+                    <RadioButton  Grid.Row="13" Grid.Column="0" Margin="40 0 0 0" Name="MeasurementSystem" IsChecked="{Binding IsMetric}">Metric</RadioButton>
+                </Grid>
+                <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="1">
+                    <Button x:Name="buttonStartStreaming"      Content="Start Streaming" Style="{StaticResource CommandButton}" Click="buttonStartStreaming_Click"  IsEnabled="{Binding IsReady}" />
+                    <Button x:Name="buttonStopStreaming"       Content="Stop Streaming"  Style="{StaticResource CommandButton}" Click="buttonStopStreaming_Click"  IsEnabled="{Binding IsStreaming}"  />
+
+                    <Button x:Name="buttonStartRecording" Content="Start Recording"  Style="{StaticResource CommandButton}" Click="ButtonStartRecording_Click" IsEnabled="{Binding IsStreaming}" Margin="0 50 0 0" />
+                    <Button x:Name="buttonStopRecording"  Content="Stop Recording"   Style="{StaticResource CommandButton}" Click="ButtonStopRecording_Click" IsEnabled="{Binding IsRecording}" />
+
+                    <Button x:Name="buttonUpdateManifest" Content="Update Manifest"  Style="{StaticResource CommandButton}" Click="ButtonUpdateManifest_Click" IsEnabled="{Binding IsReady}" Margin="0 50 0 0" />
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+        <Grid Grid.Row="0" Grid.Column="1" Background="#f0f0f0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"></RowDefinition>
+                <RowDefinition Height="60"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="60"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock FontSize="36" Text="Data Streamer" Margin="20" Grid.Row="0" Grid.Column="0" />
+            <StackPanel Orientation="Vertical" Margin="40, 0, 0, 0" Grid.Row="1" Grid.Column="0">
+                <StackPanel Margin="10,0,0,0" Orientation="Horizontal">
+                    <TextBlock Text="Status" Style="{StaticResource VersionLabel}" />
+                    <TextBlock Text="{Binding Status, Mode=TwoWay}" Style="{StaticResource VersionText}" />
+                </StackPanel>
+                <StackPanel Margin="10,0,0,0" Orientation="Horizontal">
+                    <TextBlock Text="App Version" Style="{StaticResource VersionLabel}" />
+                    <TextBlock Text="{Binding AppVersion, Mode=TwoWay}" Style="{StaticResource VersionText}" />
+                </StackPanel>
+                <StackPanel Margin="10,0,0,0" Orientation="Horizontal">
+                    <TextBlock Text="API Version" Style="{StaticResource VersionLabel}" />
+                    <TextBlock Text="{Binding ApiVersion, Mode=TwoWay}" Style="{StaticResource VersionText}" />
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="0" Background="Black" Margin="30,10,30,20">
+                <RichTextBlock Name="OutputPane" Style="{StaticResource OutputLines}" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    <Paragraph>
+                        <Run Text="{Binding OutputLines, Mode=TwoWay}" />
+                    </Paragraph>
+                </RichTextBlock>
+            </StackPanel>
+            <StackPanel Margin="30,0,0,20" Orientation="Horizontal" Grid.Row="3" Grid.Column="0">
+                <Button x:Name="buttonClearOutput"    Content="Clear Output"        Style="{StaticResource CommandButton}" Click="ButtonClearOutput_Click" />
+                <Button x:Name="buttonReset"          Content="Reset Data Streamer" Style="{StaticResource CommandButton}" Click="ButtonReset_Click"  IsEnabled="{Binding IsReady}" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+
+</Page>
