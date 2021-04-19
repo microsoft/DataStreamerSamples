@@ -19,11 +19,11 @@ using System.Threading.Tasks;
 using Windows.ApplicationModel.AppService;
 using Windows.Foundation.Collections;
 
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Serialization;
 using System.Diagnostics;
 using System.Xml.XPath;
+using System.Text.Json;
+using System.Collections;
+using System.ComponentModel;
 
 namespace Microsoft.DataStreamer.UWP
 {
@@ -109,10 +109,10 @@ namespace Microsoft.DataStreamer.UWP
                 Name = command
             };
 
-            if(oParams != null)
-                cmd.Params = JObject.FromObject(oParams);
+            if (oParams != null)
+                cmd.Params = oParams;
 
-            var json = JsonConvert.SerializeObject(cmd);
+            var json = JsonSerializer.Serialize(cmd);
 
             // Create a message to send to Data Streamer
             var message = new ValueSet
@@ -134,7 +134,7 @@ namespace Microsoft.DataStreamer.UWP
                     if(dParams != null && result.Message.ContainsKey("Data"))
                     {
                         var jsonResult = result.Message["Data"].ToString();
-                        var cmdResult  = JsonConvert.DeserializeObject<CommandResult>(jsonResult);
+                        var cmdResult  = JsonSerializer.Deserialize<CommandResult>(jsonResult);
 
                         if(cmdResult.Error != null)
                         { 
@@ -160,17 +160,13 @@ namespace Microsoft.DataStreamer.UWP
         /// </summary>
         public class Command
         {
-            [JsonProperty("jsonrpc")]
             public string Version { get; set; } = "2.0";
 
-            [JsonProperty("id")]
             public string Id { get; set; }
 
-            [JsonProperty("method")]
             public string Name { get; set; }
 
-            [JsonProperty("params")]
-            public JObject Params { get; set; }
+            public Object Params { get; set; }
         }
 
        /// <summary>
@@ -178,25 +174,19 @@ namespace Microsoft.DataStreamer.UWP
         /// </summary>
         public class CommandResult
         {
-            [JsonProperty("jsonrpc")]
             public string Version { get; set; } = "2.0";
 
-            [JsonProperty("id")]
             public string Id { get; set; }
 
-            [JsonProperty("result")]
             public string Result { get; set; }
 
-            [JsonProperty("error")]
             public CommandError Error { get; set; }
         }
 
         public class CommandError
         {
-            [JsonProperty("code")]
             public string Code { get; set; }
 
-            [JsonProperty("message")]
             public string Message { get; set; }
         }    
     }
