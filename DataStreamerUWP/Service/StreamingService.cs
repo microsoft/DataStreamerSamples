@@ -13,12 +13,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Linq;
 
 namespace Microsoft.DataStreamer.UWP
 {
@@ -44,7 +41,7 @@ namespace Microsoft.DataStreamer.UWP
 
         public virtual async Task<string> Connect(IDictionary<string, object> mesage)
         {
-            return await Task.FromResult(JsonConvert.SerializeObject(_repository.Manifest));
+            return await Task.FromResult(JsonSerializer.Serialize(_repository.Manifest));
         }
 
         public IStreamingRepository Repository => _repository;

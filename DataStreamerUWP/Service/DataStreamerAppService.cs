@@ -9,12 +9,12 @@
 //
 //*********************************************************
 
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 using Windows.ApplicationModel.AppService;
@@ -89,7 +89,7 @@ namespace Microsoft.DataStreamer.UWP
                         default:
                         {
                             var jsonParams = message.ValueOrDefault("Params", "").ToString();
-                            var parms = jsonParams == null ? null : JObject.Parse(jsonParams);
+                            var parms = jsonParams == null ? null : jsonParams;
 
                             await _service.OnCommand(command, parms);
 

@@ -4,8 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 using Microsoft.DataStreamer.UWP;
 
@@ -13,13 +11,8 @@ namespace Microsoft.DataStreamer.Samples.SensorSimulator
 {
     public class SensorChannel : Channel
     {
-        [JsonIgnore]
         public bool Active { get; set; } = true;
-
-        [JsonIgnore]
         public bool PendingActive { get; set; } = true;
-
-        [JsonIgnore]
         public int Index { get; set; }
 
         private readonly Random _random = new Random();

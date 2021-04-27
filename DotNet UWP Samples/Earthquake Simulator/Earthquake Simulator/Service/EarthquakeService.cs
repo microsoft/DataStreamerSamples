@@ -57,9 +57,9 @@ namespace Microsoft.DataStreamer.Samples.EarthquakeSimulator
             var result = await base.Connect(message);
 
             await _viewModel.ClearOutput();
-            await _viewModel.SetStatus("NotReady");
-            await _viewModel.SetApiVersion(message.ValueOrDefault("Version", "0.0").ToString());
-            await _viewModel.SetAppVersion(message.ValueOrDefault("AppVersion", "0.0").ToString());
+            _viewModel.SetStatus("NotReady");
+            _viewModel.SetApiVersion(message.ValueOrDefault("Version", "0.0").ToString());
+            _viewModel.SetAppVersion(message.ValueOrDefault("AppVersion", "0.0").ToString());
 
             return result;
         }
@@ -74,7 +74,7 @@ namespace Microsoft.DataStreamer.Samples.EarthquakeSimulator
                 { 
                     var status = message["Status"]?.ToString() ?? "";
 
-                    await _viewModel.SetStatus(status);
+                    _viewModel.SetStatus(status);
                     await _viewModel.AppendOutputLine("Status: " + status);
                 }
             }
@@ -96,10 +96,20 @@ namespace Microsoft.DataStreamer.Samples.EarthquakeSimulator
             { 
                 this.Connection = null;
 
-                await _viewModel.SetStatus("Not Connected");
-                await _viewModel.SetAppVersion("");
-                await _viewModel.SetApiVersion("");
+                _viewModel.SetStatus("Not Connected");
+                _viewModel.SetAppVersion("");
+                _viewModel.SetApiVersion("");
             }
         }
-    }
+
+		public override Task UpdateManifest(Func<string, Task> fnOnError = null)
+		{
+			throw new NotImplementedException();
+		}
+
+		public override Task OnCommand(string command, dynamic parms)
+		{
+			throw new NotImplementedException();
+		}
+	}
 }
