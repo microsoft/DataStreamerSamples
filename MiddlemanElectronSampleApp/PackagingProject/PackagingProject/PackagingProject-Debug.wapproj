@@ -59,6 +59,10 @@
       <Link>index.html</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+	<Content Include="..\..\Electron\preload.js">
+		  <Link>preload.js</Link>
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
     <Content Include="..\..\Electron\main.js">
       <Link>main.js</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -76,20 +80,12 @@
       <Link>node_modules\electron\dist\v8_context_snapshot.bin</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\Electron\node_modules\electron\dist\resources\electron.asar">
-      <Link>node_modules\electron\dist\resources\electron.asar</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="..\..\Electron\node_modules\electron\dist\resources\default_app.asar">
       <Link>node_modules\electron\dist\resources\default_app.asar</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="..\..\Electron\node_modules\electron\dist\resources.pak">
       <Link>node_modules\electron\dist\resources.pak</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\Electron\node_modules\electron\dist\natives_blob.bin">
-      <Link>node_modules\electron\dist\natives_blob.bin</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="..\..\Electron\node_modules\electron\dist\locales\en-US.pak">
