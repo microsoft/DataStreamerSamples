@@ -145,7 +145,7 @@ balanced-match@^1.0.0:
 
 base64-js@^1.5.1:
   version "1.5.1"
-  resolved "https://registry.npmjs.org/base64-js/-/base64-js-1.5.1.tgz"
+  resolved "https://registry.yarnpkg.com/base64-js/-/base64-js-1.5.1.tgz#1b1b440160a5bf7ad40b650f095963481903930a"
 
 bluebird-lst@^1.0.7, bluebird-lst@^1.0.9:
   version "1.0.9"
@@ -990,12 +990,11 @@ pify@^3.0.0:
   resolved "https://registry.npmjs.org/pify/-/pify-3.0.0.tgz"
 
 plist@^3.0.1:
-  version "3.0.2"
-  resolved "https://registry.npmjs.org/plist/-/plist-3.0.2.tgz"
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/plist/-/plist-3.0.4.tgz#a62df837e3aed2bb3b735899d510c4f186019cbe"
   dependencies:
     base64-js "^1.5.1"
     xmlbuilder "^9.0.7"
-    xmldom "^0.5.0"
 
 prepend-http@^2.0.0:
   version "2.0.0"
@@ -1406,11 +1405,7 @@ xdg-basedir@^3.0.0:
 
 xmlbuilder@^9.0.7:
   version "9.0.7"
-  resolved "https://registry.npmjs.org/xmlbuilder/-/xmlbuilder-9.0.7.tgz"
-
-xmldom@^0.5.0:
-  version "0.5.0"
-  resolved "https://registry.npmjs.org/xmldom/-/xmldom-0.5.0.tgz"
+  resolved "https://registry.yarnpkg.com/xmlbuilder/-/xmlbuilder-9.0.7.tgz#132ee63d2ec5565c557e20f4c22df9aca686b10d"
 
 y18n@^4.0.0:
   version "4.0.3"
