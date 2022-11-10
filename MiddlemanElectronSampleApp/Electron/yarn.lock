@@ -6,9 +6,9 @@
   version "4.1.0"
   resolved "https://registry.npmjs.org/7zip-bin/-/7zip-bin-4.1.0.tgz"
 
-"@electron/get@^1.0.1":
-  version "1.12.4"
-  resolved "https://registry.npmjs.org/@electron/get/-/get-1.12.4.tgz"
+"@electron/get@^1.13.0":
+  version "1.14.1"
+  resolved "https://registry.yarnpkg.com/@electron/get/-/get-1.14.1.tgz#16ba75f02dffb74c23965e72d617adc721d27f40"
   dependencies:
     debug "^4.1.1"
     env-paths "^2.2.0"
@@ -18,7 +18,7 @@
     semver "^6.2.0"
     sumchecker "^3.0.1"
   optionalDependencies:
-    global-agent "^2.0.2"
+    global-agent "^3.0.0"
     global-tunnel-ng "^2.7.1"
 
 "@nodert-win10-rs4/windows.applicationmodel.appservice@^0.4.0":
@@ -59,9 +59,9 @@
   version "4.1.5"
   resolved "https://registry.npmjs.org/@types/debug/-/debug-4.1.5.tgz"
 
-"@types/node@^14.6.2":
-  version "14.14.43"
-  resolved "https://registry.npmjs.org/@types/node/-/node-14.14.43.tgz"
+"@types/node@^16.11.26":
+  version "16.18.3"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.18.3.tgz#d7f7ba828ad9e540270f01ce00d391c54e6e0abc"
 
 ajv-keywords@^3.4.0:
   version "3.5.2"
@@ -330,10 +330,6 @@ configstore@^4.0.0:
     write-file-atomic "^2.0.0"
     xdg-basedir "^3.0.0"
 
-core-js@^3.6.5:
-  version "3.11.1"
-  resolved "https://registry.npmjs.org/core-js/-/core-js-3.11.1.tgz"
-
 core-util-is@~1.0.0:
   version "1.0.2"
   resolved "https://registry.npmjs.org/core-util-is/-/core-util-is-1.0.2.tgz"
@@ -466,12 +462,12 @@ electron-publish@20.44.4:
     lazy-val "^1.0.4"
     mime "^2.4.4"
 
-electron@^12.1.0:
-  version "12.1.0"
-  resolved "https://registry.yarnpkg.com/electron/-/electron-12.1.0.tgz#615a7f9dbb2fc79cc72361fba9f39d005c697bca"
+electron@^18.3.7:
+  version "18.3.7"
+  resolved "https://registry.yarnpkg.com/electron/-/electron-18.3.7.tgz#a22a23d63811d067c8e33abc5674122408319265"
   dependencies:
-    "@electron/get" "^1.0.1"
-    "@types/node" "^14.6.2"
+    "@electron/get" "^1.13.0"
+    "@types/node" "^16.11.26"
     extract-zip "^1.0.3"
 
 emoji-regex@^7.0.1:
@@ -603,12 +599,11 @@ get-stream@^5.1.0:
   dependencies:
     pump "^3.0.0"
 
-global-agent@^2.0.2:
-  version "2.2.0"
-  resolved "https://registry.npmjs.org/global-agent/-/global-agent-2.2.0.tgz"
+global-agent@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/global-agent/-/global-agent-3.0.0.tgz#ae7cd31bd3583b93c5a16437a1afe27cc33a1ab6"
   dependencies:
     boolean "^3.0.1"
-    core-js "^3.6.5"
     es6-error "^4.1.1"
     matcher "^3.0.0"
     roarr "^2.15.3"
